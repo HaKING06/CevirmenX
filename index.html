@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ÇevirmenX | Akıllı Çeviri Motoru</title>
+    <link rel="icon" type="image/png" href="icon.png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Poppins:wght@300;500;700;900&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        
+        body { color: #fff; overflow-x: hidden; background-color: #030305; }
+
+        /* Siber Izgara (Grid) ve Neon Küreler */
+        .bg-grid {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background-image: 
+                linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 50px 50px; z-index: -2;
+        }
+        .bg-orbs { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; overflow: hidden; z-index: -1; }
+        .orb { position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.3; animation: floatOrb 20s infinite alternate; }
+        .orb-1 { width: 450px; height: 450px; background: #00E5FF; top: -150px; left: -100px; }
+        .orb-2 { width: 550px; height: 550px; background: #7a00ff; bottom: -200px; right: -150px; animation-delay: -5s; }
+
+        @keyframes floatOrb { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(80px, 120px) scale(1.1); } }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+        /* Navbar - DÜZELTİLEN KISIM */
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 25px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+        .logo-container { display: flex; align-items: center; gap: 12px; text-decoration: none; color: #fff; }
+        .site-logo { width: 35px; height: 35px; filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.6)); }
+        .brand-name { font-size: 22px; font-weight: 900; letter-spacing: 0.5px; }
+        .brand-name span { color: #00E5FF; }
+        
+        .nav-links { display: flex; gap: 24px; align-items: center; } /* Linkleri yan yana düzgün tutan kutu */
+        .nav-link { color: rgba(255,255,255,0.6); text-decoration: none; font-weight: 500; transition: color 0.3s; }
+        .nav-link:hover { color: #00E5FF; }
+
+        /* Hero Bölümü */
+        .hero { padding: 90px 0 50px 0; text-align: center; display: flex; flex-direction: column; align-items: center; }
+        
+        /* Sayfa Kaymasını Önleyen Sabit Yükseklikli Başlık Kutusu */
+        .title-wrapper { min-height: 150px; display: flex; flex-direction: column; justify-content: center; margin-bottom: 15px; }
+        .hero h1 { font-size: 4.5rem; line-height: 1.1; font-weight: 900; letter-spacing: -1px; }
+        
+        .typing-container { 
+            display: inline-block; color: #00E5FF; border-right: 3px solid #00E5FF; 
+            white-space: nowrap; overflow: hidden; animation: blink 0.75s step-end infinite;
+            min-width: 10px;
+        }
+        @keyframes blink { 50% { border-color: transparent; } }
+
+        .hero p { font-size: 1.15rem; color: rgba(255,255,255,0.6); max-width: 650px; margin: 0 auto 40px auto; line-height: 1.6; }
+
+        /* Aksiyon Alanı */
+        .action-area { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+        
+        .glow-btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 12px;
+            padding: 16px 36px; font-size: 16px; font-weight: 700; color: #fff; text-decoration: none;
+            background: rgba(0, 229, 255, 0.08); border: 1px solid rgba(0, 229, 255, 0.5); border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.15), inset 0 0 10px rgba(0, 229, 255, 0.05);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; position: relative; overflow: hidden;
+        }
+        .glow-btn:hover { 
+            background: rgba(0, 229, 255, 0.15); transform: translateY(-3px); 
+            box-shadow: 0 10px 30px rgba(0, 229, 255, 0.3), inset 0 0 15px rgba(0, 229, 255, 0.1); 
+            border-color: #00E5FF;
+        }
+
+        .free-tag { font-size: 0.85rem; font-weight: 600; color: rgba(255, 255, 255, 0.4); display: flex; align-items: center; gap: 6px; }
+        .free-tag span { color: #4ade80; }
+
+        /* Gelişmiş Canlı Test Alanı */
+        .demo-section { padding: 40px 0 80px 0; display: flex; justify-content: center; }
+        .demo-box {
+            background: rgba(10, 10, 15, 0.7); backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px;
+            width: 100%; max-width: 750px; overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.05); 
+            transform: translateY(30px); opacity: 0; animation: slideUpFade 1s 0.3s forwards;
+        }
+        @keyframes slideUpFade { to { transform: translateY(0); opacity: 1; } }
+
+        .demo-header { 
+            background: rgba(255, 255, 255, 0.03); padding: 12px 20px; 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .window-controls { display: flex; gap: 8px; }
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
+        .dot-red { background: #ff5f56; } .dot-yellow { background: #ffbd2e; } .dot-green { background: #27c93f; }
+        .demo-title-text { font-size: 0.85rem; color: rgba(255,255,255,0.5); font-family: 'Fira Code', monospace; letter-spacing: 0.5px; }
+
+        .demo-body { padding: 25px; }
+        
+        .code-input {
+            width: 100%; height: 110px; background: transparent; border: none;
+            color: #e2e8f0; font-family: 'Fira Code', monospace;
+            font-size: 15px; resize: none; outline: none; margin-bottom: 20px; line-height: 1.6;
+        }
+        .code-input::selection { background: rgba(0, 229, 255, 0.3); color: #fff;}
+
+        .demo-action { display: flex; justify-content: space-between; align-items: center; padding-top: 15px; border-top: 1px dashed rgba(255,255,255,0.1); flex-wrap: wrap; gap: 15px;}
+        .demo-hint { font-size: 0.85rem; color: rgba(255,255,255,0.4); display: flex; align-items: center; gap: 8px; }
+        
+        .controls { display: flex; gap: 12px; align-items: center; }
+        .lang-select {
+            background: rgba(255, 255, 255, 0.05); color: #fff; border: 1px solid rgba(255,255,255,0.1);
+            padding: 10px 15px; border-radius: 8px; font-weight: 500; outline: none; cursor: pointer;
+            transition: border-color 0.2s;
+        }
+        .lang-select:hover { border-color: rgba(0, 229, 255, 0.3); }
+        .lang-select option { background: #0a0a0f; color: #fff; }
+
+        .sim-btn {
+            background: #fff; color: #000; border: none; padding: 10px 24px; border-radius: 8px;
+            font-weight: 700; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 8px;
+        }
+        .sim-btn:hover { background: #00E5FF; transform: scale(1.03); box-shadow: 0 0 15px rgba(0, 229, 255, 0.4); }
+
+        /* Özellik Kartları */
+        .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; padding: 20px 0 80px 0; }
+        .glass-card { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); padding: 35px; border-radius: 16px; transition: all 0.3s; }
+        .glass-card:hover { transform: translateY(-8px); border-color: rgba(0, 229, 255, 0.2); background: rgba(255, 255, 255, 0.04); }
+        .glass-card h3 { color: #fff; font-size: 1.2rem; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+        .glass-card h3 span { color: #00E5FF; font-size: 1.4rem; }
+        .glass-card p { color: rgba(255,255,255,0.5); font-size: 0.95rem; line-height: 1.6; }
+
+    </style>
+</head>
+<body>
+
+    <div class="bg-grid"></div>
+    <div class="bg-orbs"><div class="orb orb-1"></div><div class="orb orb-2"></div></div>
+
+    <div class="container">
+        <nav>
+            <a href="index.html" class="logo-container">
+                <img src="icon.png" alt="Logo" class="site-logo">
+                <div class="brand-name">Çevirmen<span>X</span></div>
+            </a>
+            <div class="nav-links">
+                <a href="help.html" class="nav-link">Nasıl Kurulur?</a>
+                <a href="safe.html" class="nav-link" style="color: #4ade80;">Güvenlik Merkezi</a>
+            </div>
+        </nav>
+
+        <section class="hero">
+            <div class="title-wrapper">
+                <h1>Çeviri Kurallarını<br><span class="typing-container" id="typing-text"></span></h1>
+            </div>
+            <p>Oyun jargonlarını, argo kelimeleri ve kod yapılarını anlayan; kontrolü tamamen sana bırakan, sağ tık ve kısayol entegreli akıllı çeviri eklentisi.</p>
+            
+            <div class="action-area">
+                <a href="çeviri.zip" download class="glow-btn" onclick="setTimeout(() => window.location.href='help.html', 800)">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+                    Eklentiyi İndir (v1.0)
+                </a>
+                <div class="free-tag">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+                    <span>Kayıt Yok, Kota Yok, Tamamen Ücretsiz</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="demo-section">
+            <div class="demo-box">
+                <div class="demo-header">
+                    <div class="window-controls">
+                        <div class="dot dot-red"></div><div class="dot dot-yellow"></div><div class="dot dot-green"></div>
+                    </div>
+                    <div class="demo-title-text">live-demo.js</div>
+                    <div></div>
+                </div>
+                
+                <div class="demo-body">
+                    <textarea id="demoInput" class="code-input" spellcheck="false">Örnek: Normal bir kelime olan kedi çevirisini görmek için seçebilirsin. Veya sistemin özel olarak algıladığı gg veya naber gibi kelimeleri seçip test edebilirsin.</textarea>
+                    
+                    <div class="demo-action">
+                        <span class="demo-hint">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                            Kutudan bir kelime seç, dili ayarla ve çevir!
+                        </span>
+                        <div class="controls">
+                            <select id="demoLang" class="lang-select">
+                                <option value="en">🇬🇧 İngilizce</option>
+                                <option value="de">🇩🇪 Almanca</option>
+                                <option value="fr">🇫🇷 Fransızca</option>
+                                <option value="es">🇪🇸 İspanyolca</option>
+                            </select>
+                            <button class="sim-btn" onclick="simulateAltT()">
+                                ⚡ Çevir
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="glass-card">
+                <h3><span>⌨️</span> Anında Kısayol</h3>
+                <p>Metni seç ve kısayola bas. Başka sekmeye geçip kopyala-yapıştır yapmadan, yazını anında bulunduğun sayfada çevir.</p>
+            </div>
+            <div class="glass-card">
+                <h3><span>🧠</span> Özel Sözlük</h3>
+                <p>API'nin saçmaladığı kelimeleri menüden kendi sözlüğüne ekle. "gg", "naber" veya kod satırları artık senin kontrolünde.</p>
+            </div>
+            <div class="glass-card">
+                <h3><span>🖱️</span> Sağ Tık Gücü</h3>
+                <p>Sadece klavye değil, her şey farenin ucunda. Seçtiğin kelimeye sağ tıkla ve Chrome menüsüyle çeviriyi başlat.</p>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Sayfa kaymasını önleyen optimize edilmiş Daktilo Animasyonu
+        const words = ["Sen Belirle.", "Kendin Eğit.", "Kontrol Altına Al."];
+        let i = 0, timer;
+        const typingEl = document.getElementById("typing-text");
+        
+        function typingEffect() {
+            let word = words[i].split("");
+            var loopTyping = function() {
+                if (word.length > 0) { typingEl.innerHTML += word.shift(); } 
+                else { setTimeout(deletingEffect, 2000); return false; }
+                timer = setTimeout(loopTyping, 80);
+            };
+            loopTyping();
+        }
+
+        function deletingEffect() {
+            let word = typingEl.innerHTML;
+            var loopDeleting = function() {
+                if (word.length > 0) {
+                    word = word.substring(0, word.length - 1); 
+                    typingEl.innerHTML = word.length === 0 ? "&nbsp;" : word;
+                } else {
+                    typingEl.innerHTML = "";
+                    i = (i + 1) % words.length; setTimeout(typingEffect, 400); return false;
+                }
+                timer = setTimeout(loopDeleting, 40);
+            };
+            loopDeleting();
+        }
+        typingEffect();
+
+        // GERÇEK ZAMANLI API & ÖZEL SÖZLÜK MANTIĞI
+        const mockDictionary = {
+            "gg": "good game",
+            "naber": "what's up",
+            "lag": "gecikme",
+            "afk": "away from keyboard"
+        };
+
+        function simulateAltT() {
+            const textarea = document.getElementById("demoInput");
+            const selectedLang = document.getElementById("demoLang").value;
+            const start = textarea.selectionStart;
+            const end = textarea.selectionEnd;
+            const selectedText = textarea.value.substring(start, end).trim();
+
+            if (!selectedText) {
+                alert("Lütfen kutudan çevirmek istediğiniz kelimeyi farenizle seçin!");
+                return;
+            }
+
+            const originalValue = textarea.value;
+            textarea.value = originalValue.substring(0, start) + "⏳ Çevriliyor..." + originalValue.substring(end);
+            
+            let lowerText = selectedText.toLowerCase();
+
+            if (selectedLang === 'en' && mockDictionary[lowerText]) {
+                setTimeout(() => {
+                    let translated = mockDictionary[lowerText];
+                    textarea.value = originalValue.substring(0, start) + translated + originalValue.substring(end);
+                    textarea.setSelectionRange(start, start + translated.length);
+                    textarea.focus();
+                }, 400);
+            } 
+            else {
+                let apiUrl = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(selectedText)}&langpair=tr|${selectedLang}`;
+                
+                fetch(apiUrl)
+                    .then(response => response.json())
+                    .then(data => {
+                        let translated = data.responseData.translatedText;
+                        textarea.value = originalValue.substring(0, start) + translated + originalValue.substring(end);
+                        textarea.setSelectionRange(start, start + translated.length);
+                        textarea.focus();
+                    })
+                    .catch(error => {
+                        textarea.value = originalValue.substring(0, start) + "[Hata: Bağlantı Kurulamadı]" + originalValue.substring(end);
+                    });
+            }
+        }
+    </script>
+</body>
+</html>
