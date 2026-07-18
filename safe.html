@@ -6,34 +6,67 @@
     <title>Güvenlik Merkezi | ÇevirmenX</title>
     <link rel="icon" type="image/png" href="icon.png">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&display=swap');
+
+        :root {
+            --primary: #4ade80;
+            --primary-hover: #22c55e;
+            --primary-glow: rgba(74, 222, 128, 0.25);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        body { color: #fff; background-color: #030305; overflow-x: hidden; }
+        body { color: #fff; background-color: #030305; overflow-x: hidden; display: flex; flex-direction: column; min-height: 100vh; }
 
-        .bg-grid { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-image: linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px); background-size: 50px 50px; z-index: -2; }
+        .bg-grid { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-image: linear-gradient(to right, rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.015) 1px, transparent 1px); background-size: 50px 50px; z-index: -2; }
         
-        /* Güvenlik sayfasında mavi/yeşil ton ağırlıklı orbs */
+        /* Güvenlik sayfasında İndigo/Yeşil ton ağırlıklı orbs */
         .bg-orbs { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; overflow: hidden; z-index: -1; }
-        .orb { position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.25; animation: floatOrb 20s infinite alternate; }
-        .orb-1 { width: 500px; height: 500px; background: #00E5FF; top: -100px; left: -100px; }
+        .orb { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.25; animation: floatOrb 20s infinite alternate; }
+        .orb-1 { width: 500px; height: 500px; background: #6366f1; top: -100px; left: -100px; }
         .orb-2 { width: 400px; height: 400px; background: #4ade80; bottom: -100px; right: -100px; animation-delay: -5s; }
         @keyframes floatOrb { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(50px, 80px) scale(1.1); } }
 
-        .container { max-width: 900px; margin: 0 auto; padding: 0 20px 100px 20px; }
+        .container { max-width: 900px; margin: 0 auto; padding: 0 20px 100px 20px; width: 100%; }
 
         nav { display: flex; justify-content: space-between; align-items: center; padding: 25px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05); margin-bottom: 50px;}
         .logo-container { display: flex; align-items: center; gap: 12px; text-decoration: none; color: #fff; }
-        .site-logo { width: 35px; height: 35px; filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.6)); }
+        .site-logo { width: 35px; height: 35px; filter: drop-shadow(0 0 10px rgba(99, 102, 241, 0.5)); }
         .brand-name { font-size: 22px; font-weight: 900; }
-        .brand-name span { color: #00E5FF; }
-        .nav-links { display: flex; gap: 20px; }
+        .brand-name span { color: #6366f1; }
+        
+        .nav-links { display: flex; gap: 20px; align-items: center; }
         .nav-link { color: rgba(255,255,255,0.6); text-decoration: none; font-weight: 500; transition: color 0.3s; }
-        .nav-link:hover { color: #00E5FF; }
+        .nav-link:hover { color: #6366f1; }
+
+        /* Dil Değiştirici */
+        .lang-switcher {
+            display: flex;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            padding: 2px;
+            margin-left: 8px;
+        }
+        .lang-btn {
+            padding: 6px 12px;
+            font-size: 11px;
+            font-weight: 800;
+            border: none;
+            background: transparent;
+            color: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+        .lang-btn.active {
+            background: var(--primary);
+            color: #030305;
+            box-shadow: 0 2px 8px var(--primary-glow);
+        }
 
         .header { text-align: center; margin-bottom: 60px; display: flex; flex-direction: column; align-items: center;}
-        
-        .shield-icon { margin-bottom: 20px; filter: drop-shadow(0 0 20px rgba(74, 222, 128, 0.4)); }
+        .shield-icon { margin-bottom: 20px; filter: drop-shadow(0 0 20px var(--primary-glow)); }
         
         .header h1 { font-size: 3.5rem; font-weight: 900; margin-bottom: 15px; color: #fff; }
         .header p { color: rgba(255,255,255,0.6); font-size: 1.15rem; max-width: 600px;}
@@ -45,7 +78,7 @@
             border: 1px solid rgba(255, 255, 255, 0.08); padding: 40px; border-radius: 16px;
             transition: transform 0.3s, border 0.3s;
         }
-        .glass-card:hover { transform: translateY(-5px); border-color: rgba(74, 222, 128, 0.3); }
+        .glass-card:hover { transform: translateY(-5px); border-color: var(--primary); }
 
         .icon-wrapper {
             width: 50px; height: 50px; background: rgba(74, 222, 128, 0.1); border: 1px solid rgba(74, 222, 128, 0.3);
@@ -55,7 +88,50 @@
         .glass-card h3 { font-size: 1.3rem; margin-bottom: 15px; color: #fff; }
         .glass-card p { color: rgba(255,255,255,0.5); font-size: 0.95rem; line-height: 1.6; }
 
-        @media (max-width: 768px) { .features { grid-template-columns: 1fr; } }
+        /* Footer */
+        footer {
+            margin-top: auto;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 40px 0;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .footer-brand {
+            font-size: 16px;
+            font-weight: 900;
+        }
+        .footer-brand span {
+            color: #6366f1;
+        }
+        .footer-text {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.4);
+        }
+        .footer-links {
+            display: flex;
+            gap: 20px;
+        }
+        .footer-link {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        .footer-link:hover {
+            color: #6366f1;
+        }
+
+        @media (max-width: 768px) { 
+            .features { grid-template-columns: 1fr; }
+            .footer-content { flex-direction: column; text-align: center; }
+        }
 
         .reveal { opacity: 0; transform: translateY(30px); transition: all 0.6s ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); }
@@ -65,65 +141,179 @@
     <div class="bg-grid"></div>
     <div class="bg-orbs"><div class="orb orb-1"></div><div class="orb orb-2"></div></div>
 
-    <div class="container">
+    <div class="container" style="flex: 1;">
         <nav>
             <a href="index.html" class="logo-container">
                 <img src="icon.png" alt="Logo" class="site-logo">
                 <div class="brand-name">Çevirmen<span>X</span></div>
             </a>
             <div class="nav-links">
-                <a href="index.html" class="nav-link">Ana Sayfa</a>
-                <a href="help.html" class="nav-link">Nasıl Kurulur?</a>
+                <a href="index.html" class="nav-link" id="navHome">Ana Sayfa</a>
+                <a href="help.html" class="nav-link" id="navHelp">Nasıl Kurulur?</a>
+                <div class="lang-switcher">
+                    <button class="lang-btn active" data-lang="tr">TR</button>
+                    <button class="lang-btn" data-lang="en">EN</button>
+                </div>
             </div>
         </nav>
 
         <div class="header reveal">
             <div class="shield-icon">
-                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
                     <path d="M9 12l2 2 4-4"></path>
                 </svg>
             </div>
-            <h1>Tamamen Şeffaf.<br>Tamamen Güvenli.</h1>
-            <p>ÇevirmenX, kullanıcı gizliliğini temel alarak geliştirilmiş bir bilgisayar programcılığı projesidir. Verileriniz asla kaydedilmez.</p>
+            <h1 id="safeTitle">Tamamen Şeffaf.<br>Tamamen Güvenli.</h1>
+            <p id="safeDesc">ÇevirmenX, kullanıcı gizliliğini temel alarak geliştirilmiş bir bilgisayar programcılığı projesidir. Verileriniz asla kaydedilmez.</p>
         </div>
 
         <div class="features">
             <div class="glass-card reveal">
                 <div class="icon-wrapper">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
                 </div>
-                <h3>%100 Açık Kaynak</h3>
-                <p>Uzantı paketlenmemiş (.zip) olarak sunulur. Kurulumdan önce <code>background.js</code> ve <code>content.js</code> dahil tüm kaynak kodlarını dilediğiniz gibi inceleyebilirsiniz. Gizli hiçbir betik yoktur.</p>
+                <h3 id="card1Title">%100 Açık Kaynak</h3>
+                <p id="card1Desc">Uzantı paketlenmemiş (.zip) olarak sunulur. Kurulumdan önce background.js and content.js dahil tüm kaynak kodlarını dilediğiniz gibi inceleyebilirsiniz. Gizli hiçbir betik yoktur.</p>
             </div>
 
             <div class="glass-card reveal">
                 <div class="icon-wrapper">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
                 </div>
-                <h3>Yerel Cihaz Hafızası</h3>
-                <p>Eklentiye eklediğiniz özel sözlük kelimeleriniz veya seçtiğiniz dil tercihleri, hiçbir bulut sunucuya gönderilmez. Sadece Chrome'un kendi <code>chrome.storage</code> altyapısında, kendi cihazınızda tutulur.</p>
+                <h3 id="card2Title">Yerel Cihaz Hafızası</h3>
+                <p id="card2Desc">Eklentiye eklediğiniz özel sözlük kelimeleriniz veya seçtiğiniz dil tercihleri, hiçbir bulut sunucuya gönderilmez. Sadece Chrome'un kendi chrome.storage altyapısında, kendi cihazınızda tutulur.</p>
             </div>
 
             <div class="glass-card reveal">
                 <div class="icon-wrapper">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
                 </div>
-                <h3>İzleme ve Analitik Yok</h3>
-                <p>Arka planda klavye vuruşlarınızı kaydeden, girdiğiniz siteleri izleyen veya kullanım istatistiklerinizi toplayan hiçbir Tracker (İzleyici) veya Google Analytics kodu barındırmaz.</p>
+                <h3 id="card3Title">İzleme ve Analitik Yok</h3>
+                <p id="card3Desc">Arka planda klavye vuruşlarınızı kaydeden, girdiğiniz siteleri izleyen veya kullanım istatistiklerinizi toplayan hiçbir Tracker (İzleyici) veya Google Analytics kodu barındırmaz.</p>
             </div>
 
             <div class="glass-card reveal">
                 <div class="icon-wrapper">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2"><polyline points="8 17 12 21 16 17"></polyline><line x1="12" y1="12" x2="12" y2="21"></line><path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"></path></svg>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><polyline points="8 17 12 21 16 17"></polyline><line x1="12" y1="12" x2="12" y2="21"></line><path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"></path></svg>
                 </div>
-                <h3>Güvenli API İletişimi</h3>
-                <p>Sadece siz metni seçip `Alt+T` kısayoluna bastığınızda, o an seçili olan metin şifrelenmiş HTTPS bağlantısı üzerinden MyMemory Çeviri API'sine anlık olarak iletilir ve sonuç ekrana yazdırılır.</p>
+                <h3 id="card4Title">Güvenli İletişim</h3>
+                <p id="card4Desc">Metinleri seçip çeviri kısayoluna bastığınızda, o an seçili olan metin şifrelenmiş HTTPS bağlantısı üzerinden güvenli API'lere (Google / MyMemory) iletilir ve sonuç anında ekrana yansıtılır.</p>
             </div>
         </div>
     </div>
 
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    Çevirmen<span>X</span>
+                </div>
+                <div class="footer-text" id="footerText">
+                    ÇevirmenX © 2026. Geliştiriciler ve oyuncular için tasarlandı.
+                </div>
+                <div class="footer-links">
+                    <a href="index.html" class="footer-link" id="footHome">Ana Sayfa</a>
+                    <a href="help.html" class="footer-link" id="footHelp">Kurulum</a>
+                    <a href="safe.html" class="footer-link" id="footSafe">Güvenlik</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
     <script>
+        // --- MULTILINGUAL DICTIONARY (i18n) ---
+        const SITE_STRINGS = {
+            tr: {
+                navHome: "Ana Sayfa",
+                navHelp: "Nasıl Kurulur?",
+                safeTitle: "Tamamen Şeffaf.<br>Tamamen Güvenli.",
+                safeDesc: "ÇevirmenX, kullanıcı gizliliğini temel alarak geliştirilmiş bir bilgisayar programcılığı projesidir. Verileriniz asla kaydedilmez.",
+                card1Title: "%100 Açık Kaynak",
+                card1Desc: "Uzantı paketlenmemiş (.zip) olarak sunulur. Kurulumdan önce background.js ve content.js dahil tüm kaynak kodlarını dilediğiniz gibi inceleyebilirsiniz. Gizli hiçbir betik yoktur.",
+                card2Title: "Yerel Cihaz Hafızası",
+                card2Desc: "Eklentiye eklediğiniz özel sözlük kelimeleriniz veya seçtiğiniz dil tercihleri, hiçbir bulut sunucuya gönderilmez. Sadece Chrome'un kendi chrome.storage altyapısında, kendi cihazınızda tutulur.",
+                card3Title: "İzleme ve Analitik Yok",
+                card3Desc: "Arka planda klavye vuruşlarınızı kaydeden, girdiğiniz siteleri izleyen veya kullanım istatistiklerinizi toplayan hiçbir Tracker (İzleyici) veya Google Analytics kodu barındırmaz.",
+                card4Title: "Güvenli İletişim",
+                card4Desc: "Metinleri seçip çeviri kısayoluna bastığınızda, o an seçili olan metin şifrelenmiş HTTPS bağlantısı üzerinden güvenli API'lere (Google / MyMemory) iletilir ve sonuç anında ekrana yansıtılır.",
+                
+                // Footer
+                footerText: "ÇevirmenX © 2026. Geliştiriciler ve oyuncular için tasarlandı.",
+                footHome: "Ana Sayfa",
+                footHelp: "Kurulum",
+                footSafe: "Güvenlik"
+            },
+            en: {
+                navHome: "Home",
+                navHelp: "How to Install?",
+                safeTitle: "Completely Transparent.<br>Completely Safe.",
+                safeDesc: "TranslatorX is a software engineering project developed with user privacy as its core. Your data is never saved or tracked.",
+                card1Title: "100% Open Source",
+                card1Desc: "The extension is distributed unpacked (.zip). You can inspect all files including background.js and content.js prior to manual setup. No hidden logic.",
+                card2Title: "Local Device Storage",
+                card2Desc: "Your custom dictionary terms and configuration preferences are stored locally in Chrome's chrome.storage API. We do not use remote databases.",
+                card3Title: "No Tracking or Analytics",
+                card3Desc: "We do not write background keyloggers, track browser domains, or execute tracker widgets such as Google Analytics.",
+                card4Title: "Secure API Communication",
+                card4Desc: "When text is selected and translated, queries are sent through encrypted HTTPS parameters to secure engines (Google Translate / MyMemory) and printed back instantly.",
+                
+                // Footer
+                footerText: "TranslatorX © 2026. Designed for developers and gamers.",
+                footHome: "Home",
+                footHelp: "Install",
+                footSafe: "Security"
+            }
+        };
+
+        let currentLang = localStorage.getItem('site_lang') || 'tr';
+
+        function applyLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('site_lang', lang);
+            
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                if (btn.getAttribute('data-lang') === lang) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+
+            const strings = SITE_STRINGS[lang];
+
+            document.getElementById('navHome').innerText = strings.navHome;
+            document.getElementById('navHelp').innerText = strings.navHelp;
+            document.getElementById('safeTitle').innerHTML = strings.safeTitle;
+            document.getElementById('safeDesc').innerText = strings.safeDesc;
+            
+            document.getElementById('card1Title').innerText = strings.card1Title;
+            document.getElementById('card1Desc').innerText = strings.card1Desc;
+            document.getElementById('card2Title').innerText = strings.card2Title;
+            document.getElementById('card2Desc').innerText = strings.card2Desc;
+            document.getElementById('card3Title').innerText = strings.card3Title;
+            document.getElementById('card3Desc').innerText = strings.card3Desc;
+            document.getElementById('card4Title').innerText = strings.card4Title;
+            document.getElementById('card4Desc').innerText = strings.card4Desc;
+            
+            // Footer
+            document.getElementById('footerText').innerText = strings.footerText;
+            document.getElementById('footHome').innerText = strings.footHome;
+            document.getElementById('footHelp').innerText = strings.footHelp;
+            document.getElementById('footSafe').innerText = strings.footSafe;
+        }
+
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                applyLanguage(btn.getAttribute('data-lang'));
+            });
+        });
+
+        // Initialize language
+        applyLanguage(currentLang);
+
+        // --- REVEAL ANIMATION ON SCROLL ---
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {

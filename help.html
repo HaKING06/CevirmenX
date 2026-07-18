@@ -6,35 +6,68 @@
     <title>Kurulum | ÇevirmenX</title>
     <link rel="icon" type="image/png" href="icon.png">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&display=swap');
+
+        :root {
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --primary-glow: rgba(99, 102, 241, 0.25);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        body { color: #fff; background-color: #030305; overflow-x: hidden; }
+        body { color: #fff; background-color: #030305; overflow-x: hidden; display: flex; flex-direction: column; min-height: 100vh; }
 
         /* Ana Sayfadaki Siber Izgara ve Neon Küreler */
         .bg-grid {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background-image: linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-image: linear-gradient(to right, rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.015) 1px, transparent 1px);
             background-size: 50px 50px; z-index: -2;
         }
         .bg-orbs { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; overflow: hidden; z-index: -1; }
-        .orb { position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.3; animation: floatOrb 20s infinite alternate; }
-        .orb-1 { width: 450px; height: 450px; background: #00E5FF; top: -150px; left: -100px; }
-        .orb-2 { width: 550px; height: 550px; background: #7a00ff; bottom: -200px; right: -150px; animation-delay: -5s; }
+        .orb { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.25; animation: floatOrb 20s infinite alternate; }
+        .orb-1 { width: 450px; height: 450px; background: #6366f1; top: -150px; left: -100px; }
+        .orb-2 { width: 550px; height: 550px; background: #a855f7; bottom: -200px; right: -150px; animation-delay: -5s; }
         @keyframes floatOrb { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(80px, 120px) scale(1.1); } }
 
-        .container { max-width: 850px; margin: 0 auto; padding: 0 20px 100px 20px; }
+        .container { max-width: 850px; margin: 0 auto; padding: 0 20px 100px 20px; width: 100%; }
 
         /* Navbar */
         nav { display: flex; justify-content: space-between; align-items: center; padding: 25px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05); margin-bottom: 50px;}
         .logo-container { display: flex; align-items: center; gap: 12px; text-decoration: none; color: #fff; }
-        .site-logo { width: 35px; height: 35px; filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.6)); }
+        .site-logo { width: 35px; height: 35px; filter: drop-shadow(0 0 10px var(--primary-glow)); }
         .brand-name { font-size: 22px; font-weight: 900; }
-        .brand-name span { color: #00E5FF; }
+        .brand-name span { color: var(--primary); }
         
-        .nav-links { display: flex; gap: 20px; }
+        .nav-links { display: flex; gap: 20px; align-items: center; }
         .nav-link { color: rgba(255,255,255,0.6); text-decoration: none; font-weight: 500; transition: color 0.3s; }
-        .nav-link:hover { color: #00E5FF; }
+        .nav-link:hover { color: var(--primary); }
+
+        /* Dil Değiştirici */
+        .lang-switcher {
+            display: flex;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            padding: 2px;
+            margin-left: 8px;
+        }
+        .lang-btn {
+            padding: 6px 12px;
+            font-size: 11px;
+            font-weight: 800;
+            border: none;
+            background: transparent;
+            color: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+        .lang-btn.active {
+            background: var(--primary);
+            color: #fff;
+            box-shadow: 0 2px 8px var(--primary-glow);
+        }
 
         .header { text-align: center; margin-bottom: 60px; }
         .header h1 { font-size: 3rem; font-weight: 900; margin-bottom: 15px; }
@@ -48,17 +81,61 @@
             display: flex; gap: 25px; align-items: flex-start;
             transition: transform 0.3s, border 0.3s, box-shadow 0.3s;
         }
-        .glass-step:hover { transform: translateX(10px); border-color: rgba(0, 229, 255, 0.3); box-shadow: 0 10px 30px rgba(0, 229, 255, 0.1); }
+        .glass-step:hover { transform: translateX(10px); border-color: rgba(99, 102, 241, 0.3); box-shadow: 0 10px 30px rgba(99, 102, 241, 0.1); }
 
         .step-num {
-            background: rgba(0, 229, 255, 0.1); color: #00E5FF;
-            width: 50px; height: 50px; border-radius: 12px; border: 1px solid rgba(0, 229, 255, 0.3);
+            background: rgba(99, 102, 241, 0.1); color: var(--primary);
+            width: 50px; height: 50px; border-radius: 12px; border: 1px solid rgba(99, 102, 241, 0.3);
             display: flex; align-items: center; justify-content: center; font-size: 1.3rem; font-weight: 900; flex-shrink: 0;
         }
 
         .step-content h3 { font-size: 1.3rem; margin-bottom: 10px; color: #fff; }
         .step-content p { color: rgba(255,255,255,0.6); font-size: 1rem; line-height: 1.6;}
-        code { background: rgba(0, 229, 255, 0.1); color: #00E5FF; padding: 4px 10px; border-radius: 6px; font-family: 'Fira Code', monospace; font-size: 0.9rem;}
+        code { background: rgba(99, 102, 241, 0.1); color: var(--primary); padding: 4px 10px; border-radius: 6px; font-family: 'Fira Code', monospace; font-size: 0.9rem;}
+
+        /* Footer */
+        footer {
+            margin-top: auto;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 40px 0;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .footer-brand {
+            font-size: 16px;
+            font-weight: 900;
+        }
+        .footer-brand span {
+            color: var(--primary);
+        }
+        .footer-text {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.4);
+        }
+        .footer-links {
+            display: flex;
+            gap: 20px;
+        }
+        .footer-link {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        .footer-link:hover {
+            color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .footer-content { flex-direction: column; text-align: center; }
+        }
 
         .reveal { opacity: 0; transform: translateY(30px); transition: all 0.6s ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); }
@@ -68,59 +145,173 @@
     <div class="bg-grid"></div>
     <div class="bg-orbs"><div class="orb orb-1"></div><div class="orb orb-2"></div></div>
 
-    <div class="container">
+    <div class="container" style="flex: 1;">
         <nav>
             <a href="index.html" class="logo-container">
                 <img src="icon.png" alt="Logo" class="site-logo">
                 <div class="brand-name">Çevirmen<span>X</span></div>
             </a>
             <div class="nav-links">
-                <a href="index.html" class="nav-link">Ana Sayfa</a>
-                <a href="safe.html" class="nav-link" style="color: #4ade80;">Güvenlik Merkezi</a>
+                <a href="index.html" class="nav-link" id="navHome">Ana Sayfa</a>
+                <a href="safe.html" class="nav-link" id="navSafe" style="color: #4ade80;">Güvenlik Merkezi</a>
+                <div class="lang-switcher">
+                    <button class="lang-btn active" data-lang="tr">TR</button>
+                    <button class="lang-btn" data-lang="en">EN</button>
+                </div>
             </div>
         </nav>
 
         <div class="header reveal">
-            <h1>Saniyeler İçinde Kurulum</h1>
-            <p>Eklentiyi Chrome tarayıcınıza tanıtmak için aşağıdaki 4 basit adımı izleyin.</p>
+            <h1 id="helpTitle">Saniyeler İçinde Kurulum</h1>
+            <p id="helpDesc">Eklentiyi Chrome tarayıcınıza tanıtmak için aşağıdaki 4 basit adımı izleyin.</p>
         </div>
 
         <div class="step-container">
             <div class="glass-step reveal">
                 <div class="step-num">1</div>
                 <div class="step-content">
-                    <h3>Dosyayı Klasöre Çıkartın</h3>
-                    <p>İndirdiğiniz <code>çeviri.zip</code> dosyasına sağ tıklayın ve "Buraya Ayıkla" veya "Klasöre Çıkart" diyerek ZIP arşivinden çıkarın.</p>
+                    <h3 id="step1Title">Dosyayı Klasöre Çıkartın</h3>
+                    <p id="step1Desc">İndirdiğiniz <code>cevirmenx-v1.1.zip</code> dosyasına sağ tıklayın ve "Buraya Ayıkla" veya "Klasöre Çıkart" diyerek ZIP arşivinden çıkarın.</p>
                 </div>
             </div>
 
             <div class="glass-step reveal">
                 <div class="step-num">2</div>
                 <div class="step-content">
-                    <h3>Uzantılar Menüsünü Açın</h3>
-                    <p>Chrome tarayıcınızda yeni bir sekme açın ve adres çubuğuna <code>chrome://extensions/</code> yazarak Enter tuşuna basın.</p>
+                    <h3 id="step2Title">Uzantılar Menüsünü Açın</h3>
+                    <p id="step2Desc">Chrome tarayıcınızda yeni bir sekme açın ve adres çubuğuna <code>chrome://extensions/</code> yazarak Enter tuşuna basın.</p>
                 </div>
             </div>
 
             <div class="glass-step reveal">
                 <div class="step-num">3</div>
                 <div class="step-content">
-                    <h3>Geliştirici Modunu Açın</h3>
-                    <p>Açılan sayfanın sağ üst köşesinde bulunan <strong>Geliştirici Modu</strong> (Developer Mode) anahtarını aktif hale getirin.</p>
+                    <h3 id="step3Title">Geliştirici Modunu Açın</h3>
+                    <p id="step3Desc">Açılan sayfanın sağ üst köşesinde bulunan <strong>Geliştirici Modu</strong> (Developer Mode) anahtarını aktif hale getirin.</p>
                 </div>
             </div>
 
             <div class="glass-step reveal">
                 <div class="step-num">4</div>
                 <div class="step-content">
-                    <h3>Eklentiyi Yükleyin</h3>
-                    <p>Sol üstte beliren <strong>Paketlenmemiş öğe yükle</strong> (Load unpacked) butonuna tıklayın ve 1. adımda çıkardığınız klasörü seçin. Eklentiniz anında kullanıma hazır!</p>
+                    <h3 id="step4Title">Eklentiyi Yükleyin</h3>
+                    <p id="step4Desc">Sol üstte beliren <strong>Paketlenmemiş öğe yükle</strong> (Load unpacked) butonuna tıklayın ve 1. adımda çıkardığınız klasörü seçin. Eklentiniz anında kullanıma hazır!</p>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    Çevirmen<span>X</span>
+                </div>
+                <div class="footer-text" id="footerText">
+                    ÇevirmenX © 2026. Geliştiriciler ve oyuncular için tasarlandı.
+                </div>
+                <div class="footer-links">
+                    <a href="index.html" class="footer-link" id="footHome">Ana Sayfa</a>
+                    <a href="help.html" class="footer-link" id="footHelp">Kurulum</a>
+                    <a href="safe.html" class="footer-link" id="footSafe">Güvenlik</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
     <script>
+        // --- MULTILINGUAL DICTIONARY (i18n) ---
+        const SITE_STRINGS = {
+            tr: {
+                navHome: "Ana Sayfa",
+                navSafe: "Güvenlik Merkezi",
+                helpTitle: "Saniyeler İçinde Kurulum",
+                helpDesc: "Eklentiyi Chrome tarayıcınıza tanıtmak için aşağıdaki 4 basit adımı izleyin.",
+                step1Title: "Dosyayı Klasöre Çıkartın",
+                step1Desc: "İndirdiğiniz <code>cevirmenx-v1.1.zip</code> dosyasına sağ tıklayın ve \"Buraya Ayıkla\" veya \"Klasöre Çıkart\" diyerek ZIP arşivinden çıkarın.",
+                step2Title: "Uzantılar Menüsünü Açın",
+                step2Desc: "Chrome tarayıcınızda yeni bir sekme açın ve adres çubuğuna <code>chrome://extensions/</code> yazarak Enter tuşuna basın.",
+                step3Title: "Geliştirici Modunu Açın",
+                step3Desc: "Açılan sayfanın sağ üst köşesinde bulunan Geliştirici Modu (Developer Mode) anahtarını aktif hale getirin.",
+                step4Title: "Eklentiyi Yükleyin",
+                step4Desc: "Sol üstte beliren Paketlenmemiş öğe yükle (Load unpacked) butonuna tıklayın ve 1. adımda çıkardığınız klasörü seçin. Eklentiniz anında kullanıma hazır!",
+                
+                // Footer
+                footerText: "ÇevirmenX © 2026. Geliştiriciler ve oyuncular için tasarlandı.",
+                footHome: "Ana Sayfa",
+                footHelp: "Kurulum",
+                footSafe: "Güvenlik"
+            },
+            en: {
+                navHome: "Home",
+                navSafe: "Security Center",
+                helpTitle: "Setup in Seconds",
+                helpDesc: "Follow these 4 simple steps to install the extension in your Chrome browser.",
+                step1Title: "Extract files",
+                step1Desc: "Right-click the downloaded <code>cevirmenx-v1.1.zip</code> file and select \"Extract here\" or \"Extract to folder\" to unzip.",
+                step2Title: "Open Extensions Page",
+                step2Desc: "Open a new Chrome tab and go to <code>chrome://extensions/</code> address.",
+                step3Title: "Enable Developer Mode",
+                step3Desc: "Enable the Developer Mode toggle button located at the top-right corner of the extensions page.",
+                step4Title: "Load Unpacked",
+                step4Desc: "Click the Load unpacked button on the top-left and select the extracted folder from step 1. Your extension is ready!",
+                
+                // Footer
+                footerText: "TranslatorX © 2026. Designed for developers and gamers.",
+                footHome: "Home",
+                footHelp: "Install",
+                footSafe: "Security"
+            }
+        };
+
+        let currentLang = localStorage.getItem('site_lang') || 'tr';
+
+        function applyLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('site_lang', lang);
+            
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                if (btn.getAttribute('data-lang') === lang) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+
+            const strings = SITE_STRINGS[lang];
+
+            document.getElementById('navHome').innerText = strings.navHome;
+            document.getElementById('navSafe').innerText = strings.navSafe;
+            document.getElementById('helpTitle').innerText = strings.helpTitle;
+            document.getElementById('helpDesc').innerText = strings.helpDesc;
+            
+            document.getElementById('step1Title').innerText = strings.step1Title;
+            document.getElementById('step1Desc').innerHTML = strings.step1Desc;
+            document.getElementById('step2Title').innerText = strings.step2Title;
+            document.getElementById('step2Desc').innerHTML = strings.step2Desc;
+            document.getElementById('step3Title').innerText = strings.step3Title;
+            document.getElementById('step3Desc').innerHTML = strings.step3Desc;
+            document.getElementById('step4Title').innerText = strings.step4Title;
+            document.getElementById('step4Desc').innerHTML = strings.step4Desc;
+            
+            // Footer
+            document.getElementById('footerText').innerText = strings.footerText;
+            document.getElementById('footHome').innerText = strings.footHome;
+            document.getElementById('footHelp').innerText = strings.footHelp;
+            document.getElementById('footSafe').innerText = strings.footSafe;
+        }
+
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                applyLanguage(btn.getAttribute('data-lang'));
+            });
+        });
+
+        // Initialize language
+        applyLanguage(currentLang);
+
+        // --- REVEAL ANIMATION ON SCROLL ---
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {
