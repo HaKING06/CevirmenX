@@ -36,9 +36,9 @@ In Partner Center, choose **New extension** to create a separate ÇevirmenX list
 
 ## Cloudflare Pages
 
-For a Git-connected Pages project, set the repository root as the Root directory, `npm run build` as the Build command, and `dist` as the Build output directory. Leave the deployment command unset; Pages publishes the output directory after the build. `wrangler.toml` records the Pages output directory.
+For the Cloudflare screen with a separate **Deploy command** field, set **Build command** to `npm run build`, **Deploy command** to `npm run deploy:cloudflare`, and **Root directory** to `/`. This runs `npx wrangler pages deploy dist --project-name cevirmenx`; the project slug is `cevirmenx`. Do not use `npx wrangler deploy`: that command tries to deploy a Worker and produces the missing Worker entry-point error shown by Wrangler for this Pages project. The selected Cloudflare API token must have Cloudflare Pages edit permission.
 
-If your Cloudflare pipeline has a separate **Deploy command** field, set it to `npm run deploy:cloudflare`. This runs `wrangler pages deploy dist --project-name cevirmenx`; change `cevirmenx` in `package.json` only if the Pages project slug shown in Cloudflare is different. Do not use `wrangler deploy`: that command deploys a Worker and produces the missing Worker entry-point error shown by Wrangler for this Pages project.
+If the project is configured through the classic Pages Git integration instead, set **Build command** to `npm run build` and **Build output directory** to `dist`; Pages publishes that folder itself, so no separate deploy command is needed. `wrangler.toml` records the Pages output directory.
 
 ## Release checklist
 
