@@ -22,6 +22,8 @@ Each store archive puts `manifest.json` at its root. Chrome and Edge use the sha
 
 The Edge package is also copied to `download/cevirmenx-edge.zip` at the repository root so it is easy to find and upload directly from Partner Center.
 
+ZIP/XPI files are generated build artifacts and are excluded from Git. Run `npm run build` before uploading an extension package; the store-ready Edge ZIP remains in the local `download/` folder, and the website downloads are generated in `dist/download/`.
+
 ## GitHub Pages
 
 The `.github/workflows/pages.yml` workflow builds `dist/` and deploys it to GitHub Pages whenever `main` is updated. In the repository settings, open **Settings → Pages → Build and deployment** and set **Source** to **GitHub Actions**. The published homepage is `https://haking06.github.io/CevirmenX/`; the root `README.md` is only the repository description, not the deployed website.
@@ -36,7 +38,9 @@ In Partner Center, choose **New extension** to create a separate ÇevirmenX list
 
 ## Cloudflare Pages
 
-For the Cloudflare screen with a separate **Deploy command** field, set **Build command** to `npm run build`, **Deploy command** to `npm run deploy:cloudflare`, and **Root directory** to `/`. This runs `npx wrangler pages deploy dist --project-name cevirmenx`; the project slug is `cevirmenx`. Do not use `npx wrangler deploy`: that command tries to deploy a Worker and produces the missing Worker entry-point error shown by Wrangler for this Pages project. The selected Cloudflare API token must have Cloudflare Pages edit permission.
+For the Cloudflare screen with a separate **Deploy command** field, set **Build command** to `npm run build`, **Deploy command** to `npm run deploy:cloudflare`, and **Root directory** to `/`. This runs `npx wrangler pages deploy dist --project-name cevirmenx`; the project slug is `cevirmenx`. Do not use `npx wrangler deploy`: that command tries to deploy a Worker and produces the missing Worker entry-point error shown by Wrangler for this Pages project.
+
+The selected Cloudflare API token needs **Account → Cloudflare Pages → Edit** access. Create a custom token in Cloudflare **My Profile → API Tokens**, then select it in the build settings. The `Authentication error [code: 10000]` means the current build token cannot read or deploy this Pages project. Keep the token in Cloudflare; never commit it to this repository.
 
 If the project is configured through the classic Pages Git integration instead, set **Build command** to `npm run build` and **Build output directory** to `dist`; Pages publishes that folder itself, so no separate deploy command is needed. `wrangler.toml` records the Pages output directory.
 
