@@ -5,6 +5,7 @@
 - `src/extension/` — shared extension source and the Chrome Manifest V3 manifest.
 - `src/website/` — static website source.
 - `scripts/build.mjs` — creates browser packages and the deployable website.
+- `download/cevirmenx-edge.zip` — ready-to-upload Edge Add-ons package.
 - `dist/` — generated output; do not edit by hand.
 
 ## Build everything
@@ -18,6 +19,18 @@ Install Node.js 20 or newer, then run `npm run build` or double-click `build.bat
 - `dist/index.html`, `dist/help.html`, `dist/safe.html` — static site output.
 
 Each store archive puts `manifest.json` at its root. Chrome and Edge use the shared Chrome manifest. The Firefox package uses the Firefox MV3 background-script format and Gecko metadata generated during build.
+
+The Edge package is also copied to `download/cevirmenx-edge.zip` at the repository root so it is easy to find and upload directly from Partner Center.
+
+## GitHub Pages
+
+The `.github/workflows/pages.yml` workflow builds `dist/` and deploys it to GitHub Pages whenever `main` is updated. In the repository settings, open **Settings → Pages → Build and deployment** and set **Source** to **GitHub Actions**. The published homepage is `https://haking06.github.io/CevirmenX/`; the root `README.md` is only the repository description, not the deployed website.
+
+## Microsoft Edge Add-ons
+
+In Partner Center, choose **New extension** to create a separate ÇevirmenX listing. Leave the existing **QR Tarayıcı** product untouched. Upload `download/cevirmenx-edge.zip` on the package step. The package already contains `manifest.json` at the archive root. Use `src/extension/icon.png` as the listing logo and `https://haking06.github.io/CevirmenX/safe.html` as the privacy policy URL. The store listing still needs its description, permission justifications, data-use disclosures, and review submission completed in Partner Center.
+
+`download/EDGE-STORE-LISTING.txt` contains draft Turkish and English listing copy and permission justifications.
 
 ## Cloudflare Pages
 

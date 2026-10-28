@@ -1,0 +1,40 @@
+ÇEVİRMENX — MICROSOFT EDGE ADD-ONS LISTING NOTES
+
+UPLOAD PACKAGE
+cevirmenx-edge.zip
+This is the ZIP to upload in Partner Center. The archive has manifest.json at its root.
+
+CREATE A NEW PRODUCT
+In Partner Center choose Microsoft Edge > New extension. Do not open or replace the existing QR Tarayıcı product.
+
+NAME
+ÇevirmenX
+
+SHORT DESCRIPTION
+Seçili metni, özel sözlük ve kısayollarla bulunduğunuz sayfada çevirin.
+
+TURKISH DESCRIPTION
+ÇevirmenX, web sayfalarında seçtiğiniz metinleri bulunduğunuz sayfadan ayrılmadan çevirmenizi sağlar. Metni seçip Alt+T kısayolunu kullanabilir veya sağ tık menüsünden çeviri başlatabilirsiniz. Özel sözlük, oyun terimleri ve sık kullandığınız ifadeler için kendi karşılıklarınızı tanımlamanıza yardımcı olur. Tercihleriniz, sözlüğünüz ve çeviri geçmişiniz tarayıcı depolamasında tutulur. Çeviri istediğinizde seçtiğiniz metin, sonucu üretmek için Google Translate veya MyMemory hizmetine gönderilir. Ayrıntılı veri açıklaması için gizlilik sayfasını inceleyin.
+
+ENGLISH DESCRIPTION
+CevirmenX translates text you select on a webpage without making you leave that page. Select text and use the Alt+T shortcut, or start a translation from the right-click menu. A custom dictionary lets you define preferred translations for gaming terms, slang, and frequently used phrases. Your preferences, dictionary, and translation history are stored in browser storage. When you request a translation, the selected text is sent to Google Translate or MyMemory to return the result. See the privacy page for details about data handling.
+
+PRIVACY POLICY URL
+https://haking06.github.io/CevirmenX/safe.html
+
+LISTING LOGO
+Use src/extension/icon.png (128 x 128 PNG; meets the documented 128 x 128 minimum).
+
+SINGLE PURPOSE
+Translate text selected by the user on webpages, with an optional custom dictionary.
+
+PERMISSION JUSTIFICATIONS
+storage — Stores the user's extension preferences, custom dictionary, and translation history.
+contextMenus — Adds the user-invoked translation action to the selection's right-click menu.
+All webpage hosts — The content script provides selection, translation bubble, and replace-in-page features on the pages where the user invokes the extension.
+translate.googleapis.com and api.mymemory.translated.net — The selected text is sent to a translation provider when the user requests a translation.
+
+REMOTE CODE
+No remote executable code is used. Translation text is sent to the declared translation APIs only when requested by the user.
+
+Before submission, confirm the privacy declarations and listing fields in Partner Center match the extension's current behavior. Microsoft reviews the package after submission.

@@ -12,6 +12,7 @@ const { Readable } = require('node:stream');
 const sourceExtension = path.join(root, 'src', 'extension');
 const sourceWebsite = path.join(root, 'src', 'website');
 const output = path.join(root, 'dist');
+const uploadDirectory = path.join(root, 'download');
 const extensionOnly = process.argv.includes('--extension-only');
 
 async function zipDirectory(directory, destination) {
@@ -111,5 +112,10 @@ await rm(path.join(output, 'sitemap.xml'), { force: true });
 await makeExtensionPackage('chrome');
 await makeExtensionPackage('edge');
 await makeExtensionPackage('firefox');
+await mkdir(uploadDirectory, { recursive: true });
+await cp(
+  path.join(output, 'download', 'cevirmenx-edge.zip'),
+  path.join(uploadDirectory, 'cevirmenx-edge.zip')
+);
 if (!extensionOnly) await cp(sourceWebsite, output, { recursive: true });
 console.log(`ÇevirmenX paketleri hazır: ${path.relative(root, output)}`);
