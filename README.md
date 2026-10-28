@@ -26,6 +26,8 @@ The Edge package is also copied to `download/cevirmenx-edge.zip` at the reposito
 
 The `.github/workflows/pages.yml` workflow builds `dist/` and deploys it to GitHub Pages whenever `main` is updated. In the repository settings, open **Settings → Pages → Build and deployment** and set **Source** to **GitHub Actions**. The published homepage is `https://haking06.github.io/CevirmenX/`; the root `README.md` is only the repository description, not the deployed website.
 
+For local file opening or GitHub Pages still configured to publish the repository root, `npm run build` creates small root `index.html`, `help.html`, and `safe.html` redirects into `src/website/`. These redirects are only created when those root files are absent; the full deployable site remains in `dist/`.
+
 ## Microsoft Edge Add-ons
 
 In Partner Center, choose **New extension** to create a separate ÇevirmenX listing. Leave the existing **QR Tarayıcı** product untouched. Upload `download/cevirmenx-edge.zip` on the package step. The package already contains `manifest.json` at the archive root. Use `src/extension/icon.png` as the listing logo and `https://haking06.github.io/CevirmenX/safe.html` as the privacy policy URL. The store listing still needs its description, permission justifications, data-use disclosures, and review submission completed in Partner Center.

@@ -1,4 +1,4 @@
-import { cp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
+import { access, cp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createRequire } from 'node:module';
@@ -80,6 +80,30 @@ async function zipDirectory(directory, destination) {
   await pipeline(Readable.from([Buffer.concat([...localParts, centralDirectory, end])]), createWriteStream(destination));
 }
 
+async function addRootFallback(filename, destination) {
+  const target = path.join(root, filename);
+  try {
+    await access(target);
+    return;
+  } catch {
+    const fallback = `<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="refresh" content="0; url=${destination}">
+  <title>ÇevirmenX</title>
+</head>
+<body>
+  <p>ÇevirmenX açılıyor… <a href="${destination}">Buraya tıklayın</a>.</p>
+  <script>window.location.replace(${JSON.stringify(destination)});</script>
+</body>
+</html>
+`;
+    await writeFile(target, fallback);
+  }
+}
+
 async function makeExtensionPackage(browser) {
   const staging = path.join(output, `.stage-${browser}`);
   await rm(staging, { recursive: true, force: true });
@@ -117,5 +141,15 @@ await cp(
   path.join(output, 'download', 'cevirmenx-edge.zip'),
   path.join(uploadDirectory, 'cevirmenx-edge.zip')
 );
-if (!extensionOnly) await cp(sourceWebsite, output, { recursive: true });
+const websiteDownloads = path.join(sourceWebsite, 'download');
+await mkdir(websiteDownloads, { recursive: true });
+for (const name of ['cevirmenx-chrome.zip', 'cevirmenx-edge.zip', 'cevirmenx-firefox.xpi']) {
+  await cp(path.join(output, 'download', name), path.join(websiteDownloads, name));
+}
+if (!extensionOnly) {
+  await cp(sourceWebsite, output, { recursive: true });
+  await addRootFallback('index.html', 'src/website/index.html');
+  await addRootFallback('help.html', 'src/website/help.html');
+  await addRootFallback('safe.html', 'src/website/safe.html');
+}
 console.log(`ÇevirmenX paketleri hazır: ${path.relative(root, output)}`);

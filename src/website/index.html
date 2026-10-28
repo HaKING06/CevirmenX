@@ -113,6 +113,8 @@
         .free-tag { font-size: 0.85rem; font-weight: 600; color: rgba(255, 255, 255, 0.4); display: flex; align-items: center; gap: 6px; }
         .free-tag span { color: #4ade80; }
         .download-note { color: rgba(255,255,255,0.48); font-size: 0.82rem; text-align: center; }
+        .edge-download-btn { border-color: rgba(56, 189, 248, 0.55); background: rgba(14, 165, 233, 0.10); }
+        .edge-download-btn:hover { border-color: #38bdf8; background: rgba(14, 165, 233, 0.2); }
 
         /* Gelişmiş Canlı Test Alanı */
         .demo-section { padding: 40px 0 80px 0; display: flex; justify-content: center; }
@@ -340,7 +342,8 @@
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
                     Chrome için indir (v1.2.0)
                 </a>
-                <p class="download-note" id="downloadNote">Firefox ve Edge mağaza sürümleri hazırlık aşamasında.</p>
+                <a href="download/cevirmenx-edge.zip" download class="glow-btn edge-download-btn" id="edgeDownloadBtn">Edge için indir (v1.2.0)</a>
+                <p class="download-note" id="downloadNote">Mağaza bağlantıları yayınlanana kadar ZIP paketlerini elle yükleyebilirsiniz.</p>
                 <div class="free-tag" id="freeTag">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
                     <span>Kayıt Yok, Kota Yok, Tamamen Ücretsiz</span>
@@ -454,7 +457,8 @@
                 heroTitle: "Çeviri Kurallarını",
                 heroDesc: "Oyun jargonlarını, argo kelimeleri ve kod yapılarını anlayan; kontrolü tamamen sana bırakan, sağ tık, seslendirme ve kısayol entegreli akıllı çeviri eklentisi.",
                 downloadBtn: "Chrome için indir (v1.2.0)",
-                downloadNote: "Firefox ve Edge mağaza sürümleri hazırlık aşamasında.",
+                edgeDownloadBtn: "Microsoft Edge için indir (v1.2.0)",
+                downloadNote: "Mağaza bağlantıları yayınlanana kadar ZIP paketlerini elle yükleyebilirsiniz.",
                 freeTag: "Kayıt Yok, Kota Yok, Tamamen Ücretsiz",
                 demoInputText: "Örnek: Normal bir kelime olan kedi çevirisini görmek için seçebilirsin. Veya sistemin özel olarak algıladığı gg veya naber gibi kelimeleri seçip test edebilirsin.",
                 demoHint: "Kutudan bir kelime seç, dili ayarla ve çevir!",
@@ -499,7 +503,8 @@
                 heroTitle: "Master Your",
                 heroDesc: "A smart translation extension with hotkey, text-to-speech, and context menu integration that understands gaming jargon, slang, and code structures, leaving the control completely to you.",
                 downloadBtn: "Download for Chrome (v1.2.0)",
-                downloadNote: "Firefox and Edge store releases are in preparation.",
+                edgeDownloadBtn: "Download for Microsoft Edge (v1.2.0)",
+                downloadNote: "Until store listings go live, install these ZIP packages manually.",
                 freeTag: "No Registration, No Quotas, 100% Free",
                 demoInputText: "Example: You can select the word 'kedi' (cat) to see a regular translation. Or select 'gg' or 'naber' to test custom dictionary mappings.",
                 demoHint: "Highlight a word in the box, choose language, and translate!",
@@ -567,6 +572,7 @@
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
                 ${strings.downloadBtn}
             `;
+            document.getElementById('edgeDownloadBtn').innerText = strings.edgeDownloadBtn;
             document.querySelector('#freeTag span').innerText = strings.freeTag;
             document.getElementById('demoInput').value = strings.demoInputText;
             document.getElementById('demoHint').innerHTML = `
