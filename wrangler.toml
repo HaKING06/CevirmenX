@@ -1,6 +1,6 @@
-# ÇevirmenX is a Cloudflare Pages project, not a Worker script.
-# Git-connected Pages: build with `npm run build` and publish `dist`.
-# Direct deployment: `npm run build` followed by `npm run deploy:cloudflare`.
+# ÇevirmenX is deployed as a Cloudflare Worker serving static site assets.
 name = "cevirmenx"
 compatibility_date = "2026-10-28"
-pages_build_output_dir = "./dist"
+
+[assets]
+directory = "./dist"

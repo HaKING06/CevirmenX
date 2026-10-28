@@ -36,13 +36,15 @@ In Partner Center, choose **New extension** to create a separate ÇevirmenX list
 
 `download/EDGE-STORE-LISTING.txt` contains draft Turkish and English listing copy and permission justifications.
 
-## Cloudflare Pages
+## Cloudflare Workers
 
-For the Cloudflare screen with a separate **Deploy command** field, set **Build command** to `npm run build`, **Deploy command** to `npm run deploy:cloudflare`, and **Root directory** to `/`. This runs `npx wrangler pages deploy dist --project-name cevirmenx`; the project slug is `cevirmenx`. Do not use `npx wrangler deploy`: that command tries to deploy a Worker and produces the missing Worker entry-point error shown by Wrangler for this Pages project.
+The connected Cloudflare project is a Worker named `cevirmenx`, not a Pages project. The site is deployed as Worker Static Assets from `dist/`; `wrangler.toml` declares that directory. Keep these values in **Settings → Builds**:
 
-The selected Cloudflare API token needs **Account → Cloudflare Pages → Edit** access. Create a custom token in Cloudflare **My Profile → API Tokens**, then select it in the build settings. The `Authentication error [code: 10000]` means the current build token cannot read or deploy this Pages project. Keep the token in Cloudflare; never commit it to this repository.
+- **Build command:** `npm run build`
+- **Deploy command:** `npm run deploy:cloudflare`
+- **Root directory:** `/`
 
-If the project is configured through the classic Pages Git integration instead, set **Build command** to `npm run build` and **Build output directory** to `dist`; Pages publishes that folder itself, so no separate deploy command is needed. `wrangler.toml` records the Pages output directory.
+The deploy script runs `npx wrangler deploy`. Do not use `wrangler pages deploy`: there is no Pages project named `cevirmenx` in this account. The selected user API token must retain **Account → Workers Scripts → Edit** access so Wrangler can deploy the Worker. Workers Builds uses user-scoped tokens; keep the token in Cloudflare and never commit it to this repository.
 
 ## Release checklist
 
