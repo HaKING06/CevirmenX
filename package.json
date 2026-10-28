@@ -1,0 +1,10 @@
+{
+  "name": "cevirmenx",
+  "private": true,
+  "version": "1.2.0",
+  "description": "ÇevirmenX browser extension and website",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "build:extension": "node scripts/build.mjs --extension-only"
+  }
+}
