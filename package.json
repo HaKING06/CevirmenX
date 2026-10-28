@@ -5,6 +5,7 @@
   "description": "ÇevirmenX browser extension and website",
   "scripts": {
     "build": "node scripts/build.mjs",
-    "build:extension": "node scripts/build.mjs --extension-only"
+    "build:extension": "node scripts/build.mjs --extension-only",
+    "deploy:cloudflare": "wrangler pages deploy dist --project-name cevirmenx"
   }
 }
