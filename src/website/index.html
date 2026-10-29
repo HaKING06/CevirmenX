@@ -81,6 +81,32 @@
 
         /* Hero Bölümü */
         .hero { padding: 90px 0 50px 0; text-align: center; display: flex; flex-direction: column; align-items: center; }
+
+        .hero { padding-top: 78px; }
+        .hero-eyebrow { display: inline-flex; align-items: center; gap: 9px; margin-bottom: 22px; padding: 8px 13px; border: 1px solid rgba(129,140,248,.25); border-radius: 999px; color: #c7d2fe; background: rgba(99,102,241,.08); font-size: .78rem; font-weight: 700; letter-spacing: .04em; }
+        .hero-eyebrow::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #4ade80; box-shadow: 0 0 12px #4ade80; }
+        .hero h1 { font-size: clamp(3rem, 7vw, 5.25rem); letter-spacing: -.055em; }
+        .hero p { max-width: 720px; }
+        .action-area { flex-direction: row; flex-wrap: wrap; justify-content: center; max-width: 720px; }
+        .action-area .download-note, .action-area .free-tag { flex-basis: 100%; }
+        .glow-btn { min-height: 54px; }
+        .edge-download-btn { color: #e0f2fe; }
+        .proof-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin: 0 auto 65px; max-width: 880px; overflow: hidden; border: 1px solid rgba(255,255,255,.08); border-radius: 16px; background: rgba(255,255,255,.08); }
+        .proof-item { padding: 20px; text-align: center; background: rgba(8,9,18,.88); }
+        .proof-item strong { display: block; color: #fff; font-size: .96rem; margin-bottom: 5px; }
+        .proof-item span { color: rgba(255,255,255,.48); font-size: .8rem; }
+        .section-heading { max-width: 700px; margin: 0 auto 28px; text-align: center; }
+        .section-heading .eyebrow { color: #a5b4fc; text-transform: uppercase; letter-spacing: .14em; font-size: .72rem; font-weight: 800; }
+        .section-heading h2 { margin: 10px 0; color: white; font-size: clamp(1.8rem, 4vw, 2.5rem); letter-spacing: -.04em; }
+        .section-heading p { color: rgba(255,255,255,.55); line-height: 1.7; }
+        .how-section { padding: 5px 0 65px; }
+        .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+        .step-card { position: relative; padding: 25px; min-height: 170px; border: 1px solid rgba(255,255,255,.08); border-radius: 15px; background: linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.015)); }
+        .step-number { display: inline-grid; place-items: center; width: 34px; height: 34px; margin-bottom: 16px; border-radius: 10px; color: #c7d2fe; background: rgba(99,102,241,.17); font-weight: 800; }
+        .step-card h3 { color: white; font-size: 1rem; margin-bottom: 8px; }
+        .step-card p { color: rgba(255,255,255,.52); font-size: .88rem; line-height: 1.65; }
+        .demo-section { padding-top: 5px; }
+        .features { padding-top: 15px; }
         
         .title-wrapper { min-height: 150px; display: flex; flex-direction: column; justify-content: center; margin-bottom: 15px; }
         .hero h1 { font-size: 4.5rem; line-height: 1.1; font-weight: 900; letter-spacing: -1px; }
@@ -303,6 +329,13 @@
         @media (max-width: 600px) {
             .features { grid-template-columns: 1fr; }
             .hero h1 { font-size: 3rem; }
+            .hero { padding-top: 55px; }
+            .action-area { flex-direction: column; width: 100%; }
+            .action-area .glow-btn { width: 100%; }
+            .proof-strip, .steps { grid-template-columns: 1fr; }
+            .proof-item { padding: 15px; }
+            .nav-links { gap: 12px; }
+            .nav-link { font-size: .82rem; }
             .footer-content { flex-direction: column; text-align: center; }
         }
         @media (prefers-reduced-motion: reduce) {
@@ -332,6 +365,7 @@
         </nav>
 
         <section class="hero">
+            <div class="hero-eyebrow" id="heroEyebrow">TARAYICINDA, TAM İHTİYACIN OLAN YERDE</div>
             <div class="title-wrapper">
                 <h1 id="heroTitle">Çeviri Kurallarını<br><span class="typing-container" id="typing-text"></span></h1>
             </div>
@@ -342,13 +376,19 @@
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
                     Chrome için indir (v1.2.0)
                 </a>
-                <a href="download/cevirmenx-edge.zip" download class="glow-btn edge-download-btn" id="edgeDownloadBtn">Edge için indir (v1.2.0)</a>
-                <p class="download-note" id="downloadNote">Mağaza bağlantıları yayınlanana kadar ZIP paketlerini elle yükleyebilirsiniz.</p>
+                <a href="https://microsoftedge.microsoft.com/addons/detail/%C3%A7evirmenx/mjmjodgddimmcpgofieaimjapjjnonnp" class="glow-btn edge-download-btn" id="edgeDownloadBtn">Edge mağazasından edin (v1.2.0)</a>
+                <p class="download-note" id="downloadNote">Edge düğmesi Microsoft Edge Eklentiler mağazasını açar.</p>
                 <div class="free-tag" id="freeTag">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
                     <span>Kayıt Yok, Kota Yok, Tamamen Ücretsiz</span>
                 </div>
             </div>
+        </section>
+
+        <section class="proof-strip" aria-label="ÇevirmenX öne çıkanlar">
+            <div class="proof-item"><strong id="proof1Title">Sayfadan ayrılmadan</strong><span id="proof1Desc">Seçili metni anında çevir</span></div>
+            <div class="proof-item"><strong id="proof2Title">Kişisel sözlüğün</strong><span id="proof2Desc">Terimleri kendi kurallarınla kullan</span></div>
+            <div class="proof-item"><strong id="proof3Title">Senin kontrolünde</strong><span id="proof3Desc">Kısayol, sağ tık ve ayarlanabilir deneyim</span></div>
         </section>
 
         <!-- Canlı Simülasyon -->
@@ -397,6 +437,19 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <section class="how-section">
+            <div class="section-heading">
+                <span class="eyebrow" id="howEyebrow">BASİT BİR AKIŞ</span>
+                <h2 id="howTitle">Çeviri, tam çalıştığın yerde</h2>
+                <p id="howDesc">Metni seç, hedef dilini belirle ve sonucu bulunduğun sayfada gör.</p>
+            </div>
+            <div class="steps">
+                <article class="step-card"><span class="step-number">01</span><h3 id="step1Title">Metni seç</h3><p id="step1Desc">Web sayfasında çevirmek istediğin kelimeyi veya cümleyi işaretle.</p></article>
+                <article class="step-card"><span class="step-number">02</span><h3 id="step2Title">Kısayolu kullan</h3><p id="step2Desc">Alt+T, sağ tık menüsü veya eklenti paneliyle çeviriyi başlat.</p></article>
+                <article class="step-card"><span class="step-number">03</span><h3 id="step3Title">Sonucu yönet</h3><p id="step3Desc">Çeviriyi dinle, kopyala ya da sayfadaki metinle değiştir.</p></article>
             </div>
         </section>
 
@@ -452,13 +505,22 @@
         // --- MULTILINGUAL DICTIONARY (SİTE i18n ALTYAPISI) ---
         const SITE_STRINGS = {
             tr: {
+                heroEyebrow: "TARAYICINDA, TAM İHTİYACIN OLAN YERDE",
+                proof1Title: "Sayfadan ayrılmadan", proof1Desc: "Seçili metni anında çevir",
+                proof2Title: "Kişisel sözlüğün", proof2Desc: "Terimleri kendi kurallarınla kullan",
+                proof3Title: "Senin kontrolünde", proof3Desc: "Kısayol, sağ tık ve ayarlanabilir deneyim",
+                howEyebrow: "BASİT BİR AKIŞ", howTitle: "Çeviri, tam çalıştığın yerde", howDesc: "Metni seç, hedef dilini belirle ve sonucu bulunduğun sayfada gör.",
+                step1Title: "Metni seç", step1Desc: "Web sayfasında çevirmek istediğin kelimeyi veya cümleyi işaretle.",
+                step2Title: "Kısayolu kullan", step2Desc: "Alt+T, sağ tık menüsü veya eklenti paneliyle çeviriyi başlat.",
+                step3Title: "Sonucu yönet", step3Desc: "Çeviriyi dinle, kopyala ya da sayfadaki metinle değiştir.",
+                edgeWarning: "Bu bağlantı Microsoft Edge Eklentiler mağazasını açacak. En iyi deneyim için Microsoft Edge'e geçmenizi öneririz. Devam edilsin mi?",
                 navHelp: "Nasıl Kurulur?",
                 navSafe: "Güvenlik Merkezi",
                 heroTitle: "Çeviri Kurallarını",
                 heroDesc: "Oyun jargonlarını, argo kelimeleri ve kod yapılarını anlayan; kontrolü tamamen sana bırakan, sağ tık, seslendirme ve kısayol entegreli akıllı çeviri eklentisi.",
                 downloadBtn: "Chrome için indir (v1.2.0)",
                 edgeDownloadBtn: "Microsoft Edge için indir (v1.2.0)",
-                downloadNote: "Mağaza bağlantıları yayınlanana kadar ZIP paketlerini elle yükleyebilirsiniz.",
+                downloadNote: "Edge düğmesi Microsoft Edge Eklentiler mağazasını açar.",
                 freeTag: "Kayıt Yok, Kota Yok, Tamamen Ücretsiz",
                 demoInputText: "Örnek: Normal bir kelime olan kedi çevirisini görmek için seçebilirsin. Veya sistemin özel olarak algıladığı gg veya naber gibi kelimeleri seçip test edebilirsin.",
                 demoHint: "Kutudan bir kelime seç, dili ayarla ve çevir!",
@@ -498,13 +560,22 @@
                 footSafe: "Güvenlik"
             },
             en: {
+                heroEyebrow: "RIGHT WHERE YOU NEED IT IN YOUR BROWSER",
+                proof1Title: "Stay on the page", proof1Desc: "Translate selected text instantly",
+                proof2Title: "Your own dictionary", proof2Desc: "Apply your preferred terminology",
+                proof3Title: "You stay in control", proof3Desc: "Hotkeys, context menu and flexible settings",
+                howEyebrow: "A SIMPLE WORKFLOW", howTitle: "Translation where you work", howDesc: "Select text, choose a target language and see the result on the same page.",
+                step1Title: "Select text", step1Desc: "Highlight a word or sentence on any webpage.",
+                step2Title: "Use a shortcut", step2Desc: "Start translation with Alt+T, the context menu or the extension popup.",
+                step3Title: "Use the result", step3Desc: "Listen, copy, or replace the selected text with the translation.",
+                edgeWarning: "This will open the Microsoft Edge Add-ons store. For the best experience, we recommend switching to Microsoft Edge. Continue anyway?",
                 navHelp: "How to Install?",
                 navSafe: "Security Center",
                 heroTitle: "Master Your",
                 heroDesc: "A smart translation extension with hotkey, text-to-speech, and context menu integration that understands gaming jargon, slang, and code structures, leaving the control completely to you.",
                 downloadBtn: "Download for Chrome (v1.2.0)",
                 edgeDownloadBtn: "Download for Microsoft Edge (v1.2.0)",
-                downloadNote: "Until store listings go live, install these ZIP packages manually.",
+                downloadNote: "The Edge button opens the Microsoft Edge Add-ons store.",
                 freeTag: "No Registration, No Quotas, 100% Free",
                 demoInputText: "Example: You can select the word 'kedi' (cat) to see a regular translation. Or select 'gg' or 'naber' to test custom dictionary mappings.",
                 demoHint: "Highlight a word in the box, choose language, and translate!",
@@ -563,6 +634,10 @@
 
             const strings = SITE_STRINGS[lang];
             typingWords = strings.typingWords;
+
+            for (const id of ['heroEyebrow','proof1Title','proof1Desc','proof2Title','proof2Desc','proof3Title','proof3Desc','howEyebrow','howTitle','howDesc','step1Title','step1Desc','step2Title','step2Desc','step3Title','step3Desc']) {
+                document.getElementById(id).innerText = strings[id];
+            }
 
             document.getElementById('navHelp').innerText = strings.navHelp;
             document.getElementById('navSafe').innerText = strings.navSafe;
@@ -630,6 +705,14 @@
             btn.addEventListener('click', () => {
                 applyLanguage(btn.getAttribute('data-lang'));
             });
+        });
+
+        document.getElementById('edgeDownloadBtn').addEventListener('click', (event) => {
+            event.preventDefault();
+            const brands = navigator.userAgentData?.brands?.map((brand) => brand.brand).join(' ') || '';
+            const isEdge = /Edg\//i.test(navigator.userAgent) || /Microsoft Edge/i.test(brands);
+            if (!isEdge) alert(SITE_STRINGS[currentLang].edgeWarning);
+            window.location.assign(event.currentTarget.href);
         });
 
         // --- TYPING EFFECT ANIMATION ---
