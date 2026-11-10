@@ -1,4 +1,4 @@
-# ÇevirmenX 1.3.0
+# ÇevirmenX 1.3.2
 
 [Website](https://cevir.haking.tr/) · [Support development](https://buymeacoffee.com/haking)
 

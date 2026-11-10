@@ -59,7 +59,12 @@ const POPUP_STRINGS = {
   }
 };
 
-let activeLang = 'tr';
+POPUP_STRINGS["de"]={"title": "ÜbersetzerX", "lblSource": "Quellsprache", "lblTarget": "Zielsprache", "lblBubble": "Hover-Blase anzeigen", "lblDict": "Aktivieren Sie das benutzerdefinierte Wörterbuch", "btnSettings": "Management-Panel", "toastSaved": "✓ Einstellungen gespeichert", "optAuto": "🌐 Automatische Erkennung", "langTr": "🇹🇷 Türkisch", "langEn": "🇬🇧 Englisch", "langDe": "🇩🇪 Deutsch", "langFr": "🇫🇷 Französisch", "langEs": "🇪🇸 Spanisch", "langIt": "🇮🇹 Italienisch", "langRu": "🇷🇺 Russisch", "langZh": "🇨🇳 Chinesisch (ZH)", "langJa": "🇯🇵 Japanisch (JA)", "langKo": "🇰🇷 Koreanisch (KO)", "langAr": "🇸🇦 Arabisch (AR)", "langPt": "🇵🇹 Portugiesisch (PT)", "langNl": "🇳🇱 Niederländisch (NL)", "langPl": "🇵🇱 Polnisch (PL)", "langSv": "🇸🇪 Schwedisch (SV)", "langEl": "🇬🇷 Griechisch (EL)", "langHi": "🇮🇳 Hindi (HI)"};
+POPUP_STRINGS["es"]={"title": "TraductorX", "lblSource": "Idioma de origen", "lblTarget": "Lengua de llegada", "lblBubble": "Mostrar burbuja flotante", "lblDict": "Habilitar diccionario personalizado", "btnSettings": "Panel de gestión", "toastSaved": "✓ Configuraciones guardadas", "optAuto": "🌐 Detección automática", "langTr": "🇹🇷 turco", "langEn": "🇬🇧 Inglés", "langDe": "🇩🇪 alemán", "langFr": "🇫🇷 Francés", "langEs": "🇪🇸 español", "langIt": "🇮🇹 italiano", "langRu": "🇷🇺 ruso", "langZh": "🇨🇳 Chino (ZH)", "langJa": "🇯🇵 Japonés (JA)", "langKo": "🇰🇷 Coreano (KO)", "langAr": "🇸🇦 Árabe (AR)", "langPt": "🇵🇹 Portugués (PT)", "langNl": "🇳🇱 Holandés (NL)", "langPl": "🇵🇱 Polaco (PL)", "langSv": "🇸🇪 Sueco (SV)", "langEl": "🇬🇷 Griego (EL)", "langHi": "🇮🇳 Hindi (hola)"};
+POPUP_STRINGS["fr"]={"title": "TraducteurX", "lblSource": "Langue source", "lblTarget": "Langue cible", "lblBubble": "Afficher la bulle de survol", "lblDict": "Activer le dictionnaire personnalisé", "btnSettings": "Panneau de gestion", "toastSaved": "✓ Paramètres enregistrés", "optAuto": "🌐 Détection automatique", "langTr": "🇹🇷 turc", "langEn": "🇫🇷 Anglais", "langDe": "🇩🇪 Allemand", "langFr": "🇫🇷 Français", "langEs": "Espagnol", "langIt": "🇮🇹 italien", "langRu": "🇷🇺 Russe", "langZh": "🇨🇳 Chinois (ZH)", "langJa": "🇯🇵 Japonais (JA)", "langKo": "🇰🇷 Coréen (KO)", "langAr": "🇸🇦 Arabe (AR)", "langPt": "🇵🇹 Portugais (PT)", "langNl": "🇳🇱 Néerlandais (NL)", "langPl": "🇵🇱 Polonais (PL)", "langSv": "🇸🇪 Suédois (SV)", "langEl": "🇬🇷 grec (EL)", "langHi": "🇮🇳 Hindi (HI)"};
+POPUP_STRINGS["pt"]={"title": "TradutorX", "lblSource": "Idioma de origem", "lblTarget": "Idioma alvo", "lblBubble": "Mostrar bolha flutuante", "lblDict": "Habilitar dicionário personalizado", "btnSettings": "Painel de gerenciamento", "toastSaved": "✓ Configurações salvas", "optAuto": "🌐 Detecção automática", "langTr": "🇹🇷 Turco", "langEn": "🇬🇧 Inglês", "langDe": "🇩🇪 Alemão", "langFr": "🇫🇷 Francês", "langEs": "🇪🇸 Espanhol", "langIt": "🇮🇹 Italiano", "langRu": "🇷🇺 Russo", "langZh": "🇨🇳 Chinês (ZH)", "langJa": "🇯🇵 Japonês (JA)", "langKo": "🇰🇷 Coreano (KO)", "langAr": "🇸🇦 Árabe (AR)", "langPt": "🇵🇹 Português (PT)", "langNl": "🇳🇱 Holandês (NL)", "langPl": "🇵🇱 Polonês (PL)", "langSv": "🇸🇪 Sueco (SV)", "langEl": "🇬🇷 Grego (EL)", "langHi": "🇮🇳 Hindi (HI)"};
+POPUP_STRINGS["ar"]={"title": "مترجمX", "lblSource": "لغة المصدر", "lblTarget": "اللغة المستهدفة", "lblBubble": "عرض فقاعة التحويم", "lblDict": "تمكين القاموس المخصص", "btnSettings": "لوحة الإدارة", "toastSaved": "✓ تم حفظ الإعدادات", "optAuto": "🌐 الكشف التلقائي", "langTr": "🇹🇷 تركي", "langEn": "🇬🇧 الإنجليزية", "langDe": "🇩🇪 ألماني", "langFr": "🇫🇷 فرنسية", "langEs": "🇪🇸 الاسبانية", "langIt": "🇮🇹 ايطالي", "langRu": "🇷🇺 روسي", "langZh": "🇨🇳 الصينية (ZH)", "langJa": "🇯🇵 اليابانية (JA)", "langKo": "🇰🇷 الكورية (KO)", "langAr": "🇸🇦 العربية (AR)", "langPt": "🇵🇹 البرتغالية (PT)", "langNl": "🇳🇱 الهولندية (NL)", "langPl": "🇵🇱 البولندية (PL)", "langSv": "🇸🇪 السويدية (SV)", "langEl": "🇬🇷 اليونانية (EL)", "langHi": "🇮🇳 الهندية (HI)"};
+let activeLang = 'en';
 let kaynakSelect = null;
 let hedefSelect = null;
 
@@ -73,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
       document.body.setAttribute('data-theme', result.eklentiTemasi);
     }
     
-    activeLang = result.arayuzDili || 'tr';
+    activeLang = result.arayuzDili || (['tr','en','de','es','fr','pt','ar'].includes(navigator.language.split('-')[0]) ? navigator.language.split('-')[0] : 'en');
     
     currentKaynakDil = result.kaynakDil || 'auto';
     currentHedefDil = result.hedefDil || 'en';

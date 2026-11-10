@@ -1,0 +1,14 @@
+ÇevirmenX 1.3.2
+
+Sayfadan ayrılmadan metin çevirisi, kişisel sözlük ve çeviri geçmişi.
+
+• Kendi sözlüğün: Terimleri kendi dilinle tanımla.
+• Yerel geçmiş ve favoriler: Önceki çevirilerini ara ve dışa aktar.
+• Çeviri hafızası: Tekrarlanan çevirileri bu cihazdan getir.
+
+Ücretsiz · API anahtarı gerekmez
+
+Çeviri için seçtiğin metin Google hizmetine, gerektiğinde MyMemory hizmetine gönderilir. Geçmiş ve hafıza cihazında saklanır. Analitik ve reklam izleyicisi kullanılmaz. Destek bağlantısı harici Buy Me a Coffee sayfasını açar.
+
+https://cevir.haking.tr/
+https://buymeacoffee.com/haking

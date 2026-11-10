@@ -1,0 +1,14 @@
+ÇevirmenX 1.3.2
+
+Traduisez un texte, créez votre dictionnaire et retrouvez votre historique.
+
+• Votre dictionnaire: Définissez vos propres termes.
+• Historique local et favoris: Recherchez et exportez vos traductions.
+• Mémoire de traduction: Réutilisez les traductions de cet appareil.
+
+Gratuit · Sans clé API
+
+Le texte sélectionné est envoyé à Google et si nécessaire à MyMemory. Historique et mémoire restent sur votre appareil. Aucun traceur. Le lien de soutien ouvre Buy Me a Coffee.
+
+https://cevir.haking.tr/
+https://buymeacoffee.com/haking

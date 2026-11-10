@@ -1,0 +1,14 @@
+ÇevirmenX 1.3.2
+
+Text übersetzen, eigenes Wörterbuch nutzen und im Verlauf nachsehen.
+
+• Dein Wörterbuch: Begriffe selbst definieren.
+• Lokaler Verlauf und Favoriten: Übersetzungen durchsuchen und exportieren.
+• Übersetzungsspeicher: Gespeicherte Übersetzungen wiederverwenden.
+
+Kostenlos · Kein API-Schlüssel
+
+Ausgewählter Text wird an Google und bei Bedarf MyMemory gesendet. Verlauf und Speicher bleiben auf deinem Gerät. Keine Analyse- oder Werbetracker. Der Spendenlink öffnet Buy Me a Coffee.
+
+https://cevir.haking.tr/
+https://buymeacoffee.com/haking

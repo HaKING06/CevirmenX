@@ -1,0 +1,14 @@
+ÇevirmenX 1.3.2
+
+Translate selected text, use your own dictionary and revisit your history.
+
+• Your own dictionary: Define terms in your own words.
+• Local history and favorites: Search and export previous translations.
+• Translation memory: Reuse translations stored on this device.
+
+Free · No API key required
+
+Text you choose to translate is sent to Google and, when needed, MyMemory. History and memory stay on your device. No analytics or advertising trackers. The support link opens the external Buy Me a Coffee website.
+
+https://cevir.haking.tr/
+https://buymeacoffee.com/haking

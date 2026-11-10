@@ -1,1 +1,1 @@
-Upload cevirmenx-edge.zip to the store. The extension folder is for unpacked installation. Store assets are not extension files. Firefox signing and store review are separate.
+Version 1.3.2. Upload cevirmenx-edge.zip. Use the extension folder for unpacked installation. Seven-language PNG artwork and store descriptions are in store-assets/1.3.2/. Marketing artwork is not an actual UI screenshot; take genuine extension screenshots for store screenshot fields.
