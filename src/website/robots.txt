@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
-Sitemap: https://haking06.github.io/CevirmenX/sitemap.xml
-
+Disallow: /download/
+Sitemap: https://cevir.haking.tr/sitemap.xml

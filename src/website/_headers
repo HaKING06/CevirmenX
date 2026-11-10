@@ -4,3 +4,12 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
   Cross-Origin-Opener-Policy: same-origin
+
+/download/*
+  Cache-Control: no-store
+
+/*.html
+  Cache-Control: no-cache
+
+/release.json
+  Cache-Control: no-store

@@ -14,6 +14,10 @@ const sourceWebsite = path.join(root, 'src', 'website');
 const output = path.join(root, 'dist');
 const uploadDirectory = path.join(root, 'download');
 const extensionOnly = process.argv.includes('--extension-only');
+const releaseManifest = JSON.parse(await readFile(path.join(sourceExtension, 'manifest.json'), 'utf8'));
+const releaseVersion = releaseManifest.version;
+const packageMetadata = JSON.parse(await readFile(path.join(root, 'package.json'), 'utf8'));
+if (packageMetadata.version !== releaseVersion) throw new Error('Manifest and package versions differ');
 
 async function zipDirectory(directory, destination) {
   const files = [];
@@ -122,6 +126,7 @@ async function makeExtensionPackage(browser) {
   await writeFile(path.join(staging, 'manifest.json'), `${JSON.stringify(manifest, null, 2)}\n`);
   const extension = browser === 'firefox' ? 'xpi' : 'zip';
   await zipDirectory(staging, path.join(output, 'download', `cevirmenx-${browser}.${extension}`));
+  await cp(path.join(output, 'download', `cevirmenx-${browser}.${extension}`), path.join(output, 'download', `cevirmenx-${browser}-${releaseVersion}.${extension}`));
   if (browser !== 'firefox') await cp(staging, path.join(output, browser), { recursive: true });
   await rm(staging, { recursive: true, force: true });
 }
@@ -145,9 +150,20 @@ const websiteDownloads = path.join(sourceWebsite, 'download');
 await mkdir(websiteDownloads, { recursive: true });
 for (const name of ['cevirmenx-chrome.zip', 'cevirmenx-edge.zip', 'cevirmenx-firefox.xpi']) {
   await cp(path.join(output, 'download', name), path.join(websiteDownloads, name));
+  const versioned = name.replace(/\.(zip|xpi)$/, `-${releaseVersion}.$1`);
+  await cp(path.join(output, 'download', versioned), path.join(websiteDownloads, versioned));
 }
 if (!extensionOnly) {
   await cp(sourceWebsite, output, { recursive: true });
+  const { readdir } = await import('node:fs/promises');
+  for (const filename of await readdir(sourceWebsite)) {
+    if (!/\.(html|js)$/.test(filename)) continue;
+    const source = await readFile(path.join(sourceWebsite, filename), 'utf8');
+    const updated = source.replace(/cevirmenx-(chrome|edge|firefox)(?:-\d+\.\d+\.\d+)?\.(zip|xpi)/g, `cevirmenx-$1-${releaseVersion}.$2`);
+    await writeFile(path.join(sourceWebsite, filename), updated);
+    await writeFile(path.join(output, filename), updated);
+  }
+  await writeFile(path.join(output, 'release.json'), JSON.stringify({ version: releaseVersion }, null, 2));
   await addRootFallback('index.html', 'src/website/index.html');
   await addRootFallback('help.html', 'src/website/help.html');
   await addRootFallback('safe.html', 'src/website/safe.html');

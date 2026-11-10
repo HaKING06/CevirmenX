@@ -1,1 +1,0 @@
-const fs=require('fs'),vm=require('vm');for(const [name,key] of [['options','UI_STRINGS'],['popup','POPUP_STRINGS']]){const s=fs.readFileSync('src/extension/'+name+'.js','utf8');const a=s.indexOf('const '+key+' =');const b=s.indexOf('let activeLang');fs.writeFileSync('scripts/'+name+'-strings.json',JSON.stringify(vm.runInNewContext(s.slice(a,b)+';'+key)));}

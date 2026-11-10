@@ -1,3 +1,5 @@
+![ÇevirmenX browser translation extension](src/website/images/cevirmenx-browser-translation-banner.png)
+
 # ÇevirmenX 1.3.3
 
 [Website](https://cevir.haking.tr/) · [Support development](https://buymeacoffee.com/haking)
@@ -55,3 +57,7 @@ MIT. See [LICENSE](LICENSE). See [CONTRIBUTING.md](CONTRIBUTING.md) and [SECURIT
 ## 1.3.3 dashboard
 
 Translation, dictionary, history and preferences share one dashboard. The interface language picker uses native language names. The former workspace URL redirects to the unified dashboard.
+
+## Discoverability and sharing
+
+Production canonical origin: https://cevir.haking.tr. Submit `/sitemap.xml` in Search Console. Share graphics live in `src/website/images/`. See `docs/SEO.md`.

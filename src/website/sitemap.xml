@@ -1,6 +1,2 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://haking06.github.io/CevirmenX/</loc></url>
-  <url><loc>https://haking06.github.io/CevirmenX/help.html</loc></url>
-  <url><loc>https://haking06.github.io/CevirmenX/safe.html</loc></url>
-</urlset>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"><url><loc>https://cevir.haking.tr/</loc><image:image><image:loc>https://cevir.haking.tr/images/cevirmenx-browser-translation-banner.png</image:loc></image:image></url><url><loc>https://cevir.haking.tr/help</loc></url><url><loc>https://cevir.haking.tr/privacy</loc></url><url><loc>https://cevir.haking.tr/about</loc></url><url><loc>https://cevir.haking.tr/updates</loc></url></urlset>
