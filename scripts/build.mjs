@@ -122,7 +122,7 @@ async function makeExtensionPackage(browser) {
   await writeFile(path.join(staging, 'manifest.json'), `${JSON.stringify(manifest, null, 2)}\n`);
   const extension = browser === 'firefox' ? 'xpi' : 'zip';
   await zipDirectory(staging, path.join(output, 'download', `cevirmenx-${browser}.${extension}`));
-  if (browser === 'chrome') await cp(staging, path.join(output, 'chrome'), { recursive: true });
+  if (browser !== 'firefox') await cp(staging, path.join(output, browser), { recursive: true });
   await rm(staging, { recursive: true, force: true });
 }
 
