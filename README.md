@@ -1,4 +1,4 @@
-# ÇevirmenX 1.3.2
+# ÇevirmenX 1.3.3
 
 [Website](https://cevir.haking.tr/) · [Support development](https://buymeacoffee.com/haking)
 
@@ -47,3 +47,11 @@ Update manifest and package versions together, edit `whats-new.html`, build, rev
 ## Support
 
 [Buy HaKING a coffee](https://buymeacoffee.com/haking). Donations are optional and do not unlock features.
+
+## License
+
+MIT. See [LICENSE](LICENSE). See [CONTRIBUTING.md](CONTRIBUTING.md) and [SECURITY.md](SECURITY.md).
+
+## 1.3.3 dashboard
+
+Translation, dictionary, history and preferences share one dashboard. The interface language picker uses native language names. The former workspace URL redirects to the unified dashboard.

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <title>ÇevirmenX - Yönetim Paneli</title>
   <style>
     /* Default (Midnight Indigo) theme variables */
@@ -814,7 +814,7 @@
       display: flex;
     }
   </style>
-</head>
+<link rel="stylesheet" href="panel.css"></head>
 <body>
   <div class="wrapper">
     <!-- Header -->
@@ -839,14 +839,11 @@
 
       <!-- Controls & Dil Seçimi -->
       <div class="header-controls">
-        <div class="lang-switcher">
-          <button class="lang-change-btn active" data-lang="tr">TR</button>
-          <button class="lang-change-btn" data-lang="en">EN</button><button class="lang-change-btn" data-lang="de">DE</button><button class="lang-change-btn" data-lang="es">ES</button><button class="lang-change-btn" data-lang="fr">FR</button><button class="lang-change-btn" data-lang="pt">PT</button><button class="lang-change-btn" data-lang="ar">AR</button>
-        </div>
+        <div class="language-control"><span aria-hidden="true">◎</span><select id="interface-language" aria-label="Interface language"><option value="en">English</option><option value="tr">Türkçe</option><option value="de">Deutsch</option><option value="es">Español</option><option value="fr">Français</option><option value="pt">Português</option><option value="ar">العربية</option></select></div>
 
         <!-- Navigation Tabs -->
-        <div class="tabs">
-          <button class="tab-btn active" data-tab="sozluk">
+        <div class="tabs" role="tablist"><button class="tab-btn active" data-tab="ceviri"><span id="workspace-tab-label">Translate</span></button>
+          <button class="tab-btn" data-tab="sozluk">
             <span>📖 Özel Sözlük</span>
           </button>
           <button class="tab-btn" data-tab="gecmis">
@@ -860,10 +857,10 @@
     </div>
 
     <!-- Main Settings Card -->
-    <div class="card">
+    <div class="card"><div class="tab-content active" id="tab-ceviri"><div class="workspace-intro"><span class="panel-eyebrow">ÇEVİRMENX / WORKSPACE</span><h2 id="workspace-heading">Translate without leaving your flow.</h2><p id="workspace-description">Write your text, choose a language and translate. Your history stays on this device.</p></div><section><h2>Yeni çeviri</h2><div class="row"><label>Kaynak <select id="w-source"><option value="auto">Otomatik</option></select></label><label>Hedef <select id="w-target"></select></label></div><textarea id="w-text" maxlength="5000" placeholder="Çevirmek istediğin metin" aria-label="Çevrilecek metin"></textarea><button id="w-translate">Çevir</button><p id="w-result" role="status" style="white-space:pre-wrap"></p><button id="w-copy">Kopyala</button></section><section><h2>Tercihler</h2><label><input type="checkbox" id="w-memory"> Çeviri hafızası (bu cihazda)</label><label><input type="checkbox" id="w-release">Güncelleme notlarını otomatik aç</label><button id="w-clearMemory">Hafızayı temizle</button><a href="#" id="w-shortcut">Kısayolları düzenle</a></section><section><h2>Geçmiş ve favoriler</h2><input id="w-search" placeholder="Geçmişte ara" aria-label="Geçmişte ara"><button id="w-export">JSON dışa aktar</button><button id="w-clear">Geçmişi sil</button><div id="w-history"></div></section></div>
       
       <!-- TAB 1: ÖZEL SÖZLÜK -->
-      <div class="tab-content active" id="tab-sozluk">
+      <div class="tab-content" id="tab-sozluk">
         <h3>Dinamik Çeviri Sözlüğü</h3>
         <div class="subtitle">Çeviri motorunun hata yaptığı veya istediğiniz jargona uydurmak istediğiniz terimleri belirli bir kaynak ve hedef dile göre kaydedin.</div>
         
@@ -1016,7 +1013,7 @@
                 </div>
               </div>
 
-              <div class="shortcut-warning">
+              <p id="kisayolTalimat" class="subtitle"></p><div class="shortcut-warning">
                 <div style="font-weight: 800; color: #f1f5f9; margin-bottom: 4px; display: flex; align-items: center; gap: 4px;">
                   ⚠️ Kısayol Türleri ve Sınırlandırmalar
                 </div>
@@ -1038,6 +1035,6 @@
 
     </div>
   </div>
-  <div style="display:flex;justify-content:center;gap:16px;padding:14px;font:12px system-ui"><a href="workspace.html" target="_blank" style="color:#a5b4fc">↗ Çeviri çalışma alanı</a><a href="https://buymeacoffee.com/haking" target="_blank" rel="noopener" style="color:#cbbf9b">☕ Destek ol</a></div><script src="options.js"></script>
+  <footer class="panel-footer"><span>ÇevirmenX 1.3.3</span><a href="https://buymeacoffee.com/haking" target="_blank" rel="noopener">☕ Buy me a coffee</a></footer><script src="options.js"></script><script src="panel-workspace.js"></script>
 </body>
 </html>

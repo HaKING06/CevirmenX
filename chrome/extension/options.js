@@ -177,20 +177,13 @@ let tempKaynakVal = 'tr';
 let tempHedefVal = 'en';
 
 function initLanguageSwitcher() {
-  chrome.storage.sync.get(['arayuzDili'], (result) => {
-    activeLang = result.arayuzDili || (['tr','en','de','es','fr','pt','ar'].includes(navigator.language.split('-')[0]) ? navigator.language.split('-')[0] : 'en');
-    applyUiLanguage(activeLang);
-  });
-
-  document.querySelectorAll('.lang-change-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const selected = btn.getAttribute('data-lang');
-      activeLang = selected;
-      chrome.storage.sync.set({ arayuzDili: selected }, () => {
-        applyUiLanguage(selected);
-      });
-    });
-  });
+ const picker=document.getElementById('interface-language');
+ chrome.storage.sync.get('arayuzDili', result=>{
+  const preferred=(navigator.languages || [navigator.language]).map(x=>x.split('-')[0]).find(x=>UI_STRINGS[x]) || 'en';
+  activeLang=UI_STRINGS[result.arayuzDili]?result.arayuzDili:preferred;
+  picker.value=activeLang;applyUiLanguage(activeLang);
+ });
+ picker.addEventListener('change',()=>{activeLang=picker.value;chrome.storage.sync.set({arayuzDili:activeLang});applyUiLanguage(activeLang);});
 }
 
 // Arama kutulu dil seçicisi yapıcı metodu
@@ -338,6 +331,7 @@ function getOzelHedefList(strings) {
 }
 
 function applyUiLanguage(lang) {
+ document.dispatchEvent(new CustomEvent("cx-language",{detail:lang}));
  document.documentElement.lang=lang;document.documentElement.dir=lang==='ar'?'rtl':'ltr';
   document.querySelectorAll('.lang-change-btn').forEach(btn => {
     if (btn.getAttribute('data-lang') === lang) {

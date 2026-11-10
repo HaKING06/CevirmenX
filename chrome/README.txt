@@ -1,1 +1,1 @@
-Version 1.3.2. Upload cevirmenx-chrome.zip. Use the extension folder for unpacked installation. Seven-language PNG artwork and store descriptions are in store-assets/1.3.2/. Marketing artwork is not an actual UI screenshot; take genuine extension screenshots for store screenshot fields.
+Version 1.3.3. Upload cevirmenx-chrome.zip. extension/ is the unpacked browser package. Marketing assets are separate from extension files.
