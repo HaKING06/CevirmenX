@@ -1,19 +1,45 @@
-from PIL import Image,ImageDraw,ImageFont
+"""Render the ÇevirmenX mark, browser icons and localized release artwork."""
 from pathlib import Path
-r=Path('src/website/images');r.mkdir(exist_ok=True)
-def font(size,bold=False):return ImageFont.truetype('C:/Windows/Fonts/arialbd.ttf' if bold else 'C:/Windows/Fonts/arial.ttf',size)
-for filename,w,h,title,subtitle in [('cevirmenx-browser-translation-banner',1200,630,'Read beyond language.','Selected text. Personal dictionary. Your flow.'),('cevirmenx-ceviri-eklentisi',1200,630,'Dil engelini geride bırak.','Seçili metin çevirisi. Kişisel sözlük. Tek kısayol.'),('cevirmenx-social-square',1080,1080,'Select. Translate.','Keep your flow.')]:
- im=Image.new('RGB',(w,h));px=im.load()
- for y in range(h):
-  for x in range(w):
-   glow=max(0,1-(((x-w*.80)/(w*.7))**2+((y-h*.35)/(h*.9))**2))
-   px[x,y]=(int(10+glow*18),int(10+glow*15),int(20+glow*43))
- d=ImageDraw.Draw(im);pad=65
- d.rounded_rectangle((pad,50,pad+42,92),12,fill='#7570ff');d.text((pad+11,51),'✦',font=font(28),fill='white');d.text((pad+57,54),'ÇevirmenX',font=font(26,True),fill='#f7f4ff')
- size=57 if w==1200 else 65
- while d.textlength(title,font=font(size,True))>w-2*pad:size-=1
- d.text((pad,145),title,font=font(size,True),fill='#f5f3ff');d.text((pad,222),subtitle,font=font(23),fill='#b7b1d3')
- top=310 if h==630 else 370;bottom=h-95
- d.rounded_rectangle((pad,top,w-pad,bottom),18,fill='#151523',outline='#353147',width=2)
- d.text((pad+26,top+20),'EN → TR',font=font(16),fill='#aaa0ff');d.text((pad+26,top+60),'Every word opens a new perspective.',font=font(23),fill='#f4f1ff');d.text((pad+26,top+105),'Her kelime yeni bir bakış açısı açar.',font=font(22),fill='#c0b9df')
- d.text((pad,h-52),'cevir.haking.tr',font=font(20,True),fill='#aaa0ff');d.text((w-240,h-52),'HaKING / FREE',font=font(15),fill='#aaa6bf');im.save(r/(filename+'.png'),optimize=True)
+import json
+from PIL import Image, ImageDraw, ImageFont
+import arabic_reshaper
+from bidi.algorithm import get_display
+
+ROOT = Path(__file__).resolve().parents[1]
+WEB = ROOT / 'src/website'
+EXT = ROOT / 'src/extension'
+languages = {'en':'English','tr':'Türkçe','de':'Deutsch','es':'Español','fr':'Français','pt':'Português','ar':'العربية','ru':'Русский'}
+titles = dict(zip(languages, ['Translate in context.', 'Metni yerinde çevir.', 'Direkt im Kontext übersetzen.', 'Traduce en contexto.', 'Traduisez en contexte.', 'Traduza no contexto.', 'ترجم النص في سياقه.', 'Переводите в контексте.']))
+subtitles = dict(zip(languages, ['Select text and press Alt + T','Metni seç ve Alt + T tuşlarına bas','Text auswählen und Alt + T drücken','Selecciona texto y pulsa Alt + T','Sélectionnez le texte et appuyez sur Alt + T','Selecione o texto e pressione Alt + T','حدد النص واضغط على Alt + T','Выделите текст и нажмите Alt + T']))
+def font(size, bold=False):
+    return ImageFont.truetype('arialbd.ttf' if bold else 'arial.ttf', size)
+def display(value, lang):
+    return get_display(arabic_reshaper.reshape(value)) if lang == 'ar' else value
+
+mark=Image.new('RGBA',(256,256))
+pen=ImageDraw.Draw(mark)
+pen.rounded_rectangle((4,4,252,252),60,fill='#302680')
+pen.polygon([(38,64),(127,64),(179,125),(145,125),(183,171),(130,171)],fill='#b8aaff')
+pen.polygon([(217,78),(172,78),(128,130),(159,130),(83,205),(131,205)],fill='#77ebe4')
+for size in [16,32,48,128]:
+    mark.resize((size,size),Image.Resampling.LANCZOS).save(EXT/f'icon-{size}.png')
+mark.resize((128,128),Image.Resampling.LANCZOS).save(EXT/'icon.png')
+mark.save(WEB/'icon.png')
+mark.save(WEB/'favicon.ico',sizes=[(16,16),(32,32),(48,48)])
+for lang in languages:
+    art=Image.new('RGB',(1200,630),'#16122b')
+    draw=ImageDraw.Draw(art)
+    for i in range(11):
+        x=735+i*25
+        draw.arc((x,-135,x+460,615),75,285,fill=(75+i*4,65+i*4,131+i*5),width=3)
+    art.paste(mark.resize((62,62)),(60,52),mark.resize((62,62)))
+    draw.text((140,62),'ÇevirmenX',font=font(33,True),fill='white')
+    title=display(titles[lang],lang)
+    size=79
+    while draw.textlength(title,font=font(size,True))>1070:size-=2
+    draw.text((60,235),title,font=font(size,True),fill='#f7f6ff')
+    draw.text((64,357),display(subtitles[lang],lang),font=font(30),fill='#c2b8ea')
+    draw.line((65,505,1135,505),fill='#565173',width=2)
+    draw.text((65,546),'cevir.haking.tr',font=font(25),fill='#86e6df')
+    draw.text((965,546),'v 1.4.0',font=font(25),fill='#cec6ee')
+    art.save(WEB/'images'/f'poster-{lang}.png',optimize=True)

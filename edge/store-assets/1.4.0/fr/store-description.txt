@@ -1,0 +1,12 @@
+ÇevirmenX 1.4.0
+
+Traduisez un texte, créez votre dictionnaire et retrouvez votre historique.
+
+Votre dictionnaire — Définissez vos propres termes.
+Historique local et favoris — Recherchez et exportez vos traductions.
+Mémoire de traduction — Réutilisez les traductions de cet appareil.
+
+Gratuit · Sans clé API
+
+https://cevir.haking.tr/
+cevir@haking.tr

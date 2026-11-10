@@ -1,6 +1,6 @@
-![ÇevirmenX browser translation extension](src/website/images/cevirmenx-browser-translation-banner.png)
+![ÇevirmenX browser translation extension](src/website/images/poster-en.png)
 
-# ÇevirmenX 1.3.3
+# ÇevirmenX 1.4.0
 
 [Website](https://cevir.haking.tr/) · [Support development](https://buymeacoffee.com/haking)
 
@@ -14,7 +14,7 @@ A free, API-key-free browser translation extension. Select text and press Alt+T,
 - Automatic source language handling, request deduplication and 12-second service timeouts
 - Google translation endpoint with MyMemory fallback for supported short requests
 - Version update page with an opt-out preference
-- Website in Turkish, English, German, Spanish, French and Portuguese; light and dark themes
+- Website in Turkish, English, German, Spanish, French, Portuguese, Arabic and Russian; light and dark themes
 
 ## Build and installation
 
@@ -54,10 +54,12 @@ Update manifest and package versions together, edit `whats-new.html`, build, rev
 
 MIT. See [LICENSE](LICENSE). See [CONTRIBUTING.md](CONTRIBUTING.md) and [SECURITY.md](SECURITY.md).
 
-## 1.3.3 dashboard
+## 1.4.0 dashboard
 
 Translation, dictionary, history and preferences share one dashboard. The interface language picker uses native language names. The former workspace URL redirects to the unified dashboard.
 
 ## Discoverability and sharing
 
 Production canonical origin: https://cevir.haking.tr. Submit `/sitemap.xml` in Search Console. Share graphics live in `src/website/images/`. See `docs/SEO.md`.
+
+Support: [cevir@haking.tr](mailto:cevir@haking.tr)

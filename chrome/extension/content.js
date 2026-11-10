@@ -205,7 +205,7 @@ function yuzenKartGoster(originalText, translatedText, range, targetLang, source
     `;
 
     let logoSpan = document.createElement("span");
-    logoSpan.innerText = isEn ? "TranslatorX" : "ÇevirmenX";
+    logoSpan.innerText = cxText("TranslatorX", result.arayuzDili || navigator.language.split("-")[0]);
     logoSpan.style.cssText = `font-weight: 800; color: ${colors.primary};`;
 
     let langSpan = document.createElement("span");
@@ -250,7 +250,7 @@ function yuzenKartGoster(originalText, translatedText, range, targetLang, source
 
     // TTS Button
     let dinleBtn = document.createElement("button");
-    dinleBtn.innerText = isEn ? "🔊 Listen" : "🔊 Dinle";
+    dinleBtn.innerText = cxText("🔊 Listen", result.arayuzDili || navigator.language.split("-")[0]);
     dinleBtn.style.cssText = `
       all: initial;
       background: rgba(255, 255, 255, 0.06);
@@ -276,7 +276,7 @@ function yuzenKartGoster(originalText, translatedText, range, targetLang, source
 
     // Replace (Değiştir) Button
     let degistirBtn = document.createElement("button");
-    degistirBtn.innerText = isEn ? "🔄 Replace" : "🔄 Değiştir";
+    degistirBtn.innerText = cxText("🔄 Replace", result.arayuzDili || navigator.language.split("-")[0]);
     degistirBtn.style.cssText = `
       all: initial;
       background: ${colors.primary};
@@ -298,10 +298,10 @@ function yuzenKartGoster(originalText, translatedText, range, targetLang, source
         try {
           replaceRangeText(range, translatedText);
           kartiKapat();
-          toastGoster(isEn ? "Text replaced & copied ✓" : "Cümle değiştirildi & kopyalandı ✓", "basari");
+          toastGoster(cxText("Text replaced & copied ✓", result.arayuzDili || navigator.language.split("-")[0]), "basari");
         } catch (e) {
           console.error("Yerinde değiştirme hatası:", e);
-          toastGoster(isEn ? "Error: Could not replace!" : "Hata: Metin değiştirilemedi!", "hata");
+          toastGoster(cxText("Error: Could not replace!", result.arayuzDili || navigator.language.split("-")[0]), "hata");
         }
       });
     };
@@ -517,7 +517,7 @@ function tetikleBalonCevirisi() {
       yuzenKartGoster(seciliMetin, translation, range, target, "Sözlük");
       gecmiseKaydet(seciliMetin, translation, "Sözlük", target);
     } else {
-      toastGoster(isEn ? "Translating..." : "Çeviriliyor...", "bilgi");
+      toastGoster(cxText("Translating...", result.arayuzDili || navigator.language.split("-")[0]), "bilgi");
 
       chrome.runtime.sendMessage({
         action: "perform_translation",
@@ -529,7 +529,7 @@ function tetikleBalonCevirisi() {
           yuzenKartGoster(seciliMetin, response.translatedText, range, target, response.detectedSource || source);
           gecmiseKaydet(seciliMetin, response.translatedText, response.detectedSource || source, target);
         } else {
-          toastGoster(isEn ? "Error: Translation failed!" : "Hata: Çeviri Yapılamadı!", "hata");
+          toastGoster(cxText("Error: Translation failed!", result.arayuzDili || navigator.language.split("-")[0]), "hata");
         }
       });
     }
@@ -640,18 +640,16 @@ function tetikleCeviri() {
     if (translation) {
       if (isEditable) {
         metniDegistir(aktifElement, translation);
-        toastGoster(isEn ? "Translated from Dictionary ✓" : "Sözlükten Çevrildi ✓", "basari");
+        toastGoster(cxText("Translated from Dictionary ✓", result.arayuzDili || navigator.language.split("-")[0]), "basari");
       } else if (selectionRange) {
         yuzenKartGoster(seciliMetin, translation, selectionRange, target, "Sözlük");
       }
       gecmiseKaydet(seciliMetin, translation, "Sözlük", target);
     } else {
-      if (isEditable) {
-        metniDegistir(aktifElement, isEn ? "" : "");
-      } else {
-        toastGoster(isEn ? "Translating..." : "Çeviriliyor...", "bilgi");
-      }
+      toastGoster(cxText("Translating...", result.arayuzDili || navigator.language.split("-")[0]), "bilgi");
 
+      const selectionSnapshot = isEditable && typeof aktifElement.selectionStart === 'number'
+        ? [aktifElement.value, aktifElement.selectionStart, aktifElement.selectionEnd] : null;
       chrome.runtime.sendMessage({
         action: "perform_translation",
         text: seciliMetin,
@@ -659,18 +657,16 @@ function tetikleCeviri() {
         targetLang: target
       }, (response) => {
         if (response && response.success) {
-          if (isEditable) {
+          if (isEditable && document.activeElement === aktifElement && (selectionSnapshot ? (selectionSnapshot[0] === aktifElement.value && selectionSnapshot[1] === aktifElement.selectionStart && selectionSnapshot[2] === aktifElement.selectionEnd) : window.getSelection()?.toString() === seciliMetin)) {
             metniDegistir(aktifElement, response.translatedText);
-            toastGoster(isEn ? "Translation Success ✓" : "Çeviri Başarılı ✓", "basari");
+            toastGoster(cxText("Translation Success ✓", result.arayuzDili || navigator.language.split("-")[0]), "basari");
           } else if (selectionRange) {
             yuzenKartGoster(seciliMetin, response.translatedText, selectionRange, target, response.detectedSource || source);
           }
           gecmiseKaydet(seciliMetin, response.translatedText, response.detectedSource || source, target);
         } else {
-          if (isEditable) {
-            metniDegistir(aktifElement, seciliMetin);
-          }
-          toastGoster(isEn ? "Error: Translation failed!" : "Hata: Çeviri Yapılamadı!", "hata");
+          
+          toastGoster(cxText("Error: Translation failed!", result.arayuzDili || navigator.language.split("-")[0]), "hata");
         }
       });
     }

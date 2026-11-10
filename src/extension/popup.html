@@ -1,8 +1,9 @@
 <!DOCTYPE html>
+
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <style>
+<meta charset="utf-8"/>
+<style>
     /* Default (Midnight Indigo) theme variables */
     :root {
       --primary: #6366f1;
@@ -304,56 +305,46 @@
       opacity: 1;
     }
   </style>
-<link rel="stylesheet" href="popup-refined.css"></head>
+<link href="popup-refined.css" rel="stylesheet"/></head>
 <body>
-  <div class="container">
-    <div class="brand">
-      <svg class="brand-logo" fill="none" viewBox="0 0 24 24" stroke="var(--primary)" stroke-width="2.5">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 21a.75.75 0 0 1-.75-.75V3.75a.75.75 0 0 1 1.5 0v16.5a.75.75 0 0 1-.75.75z" />
-        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 12h16.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1 0-1.5z" />
-        <path stroke-linecap="round" stroke-linejoin="round" d="m16.5 7.5 3 3-3 3M7.5 16.5l-3-3 3-3" />
-      </svg>
-      <div class="brand-name">ÇevirmenX</div>
-    </div>
-    
-    <div class="form-group">
-      <label for="kaynakDilContainer" id="lblKaynakDil">Kaynak Dil (Source)</label>
-      <div id="kaynakDilContainer"></div>
-    </div>
-    
-    <div class="form-group">
-      <label for="hedefDilContainer" id="lblHedefDil">Hedef Dil (Target)</label>
-      <div id="hedefDilContainer"></div>
-    </div>
-
-    <div class="toggle-group">
-      <span class="toggle-label">Çeviri Balonu Göster</span>
-      <label class="switch">
-        <input type="checkbox" id="balonGosterToggle" checked>
-        <span class="slider"></span>
-      </label>
-    </div>
-
-    <div class="toggle-group">
-      <span class="toggle-label">Özel Sözlük Etkin</span>
-      <label class="switch">
-        <input type="checkbox" id="sozlukCevirisiEtkinToggle" checked>
-        <span class="slider"></span>
-      </label>
-    </div>
-    
-    <div id="statusToast" class="status-toast">
-      <span>✓ Ayarlar Kaydedildi</span>
-    </div>
-
-    <button id="ayarlarBtn" class="btn-secondary">
-      <svg style="width: 14px; height: 14px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-      </svg>
-      <span>Yönetim Paneli</span>
-    </button>
-  </div>
-  <div style="display:flex;justify-content:center;gap:16px;padding:14px;font:12px system-ui"><a href="https://buymeacoffee.com/haking" target="_blank" rel="noopener" style="color:#cbbf9b">☕ Destek ol</a></div><script src="popup.js"></script>
+<div class="container">
+<div class="brand">
+<img alt="" class="brand-logo" src="icon.png"/>
+<div class="brand-name">ÇevirmenX</div>
+</div>
+<div class="form-group">
+<label for="kaynakDilContainer" id="lblKaynakDil">Kaynak Dil (Source)</label>
+<div id="kaynakDilContainer"></div>
+</div>
+<div class="form-group">
+<label for="hedefDilContainer" id="lblHedefDil">Hedef Dil (Target)</label>
+<div id="hedefDilContainer"></div>
+</div>
+<div class="toggle-group">
+<span class="toggle-label">Çeviri Balonu Göster</span>
+<label class="switch">
+<input checked="" id="balonGosterToggle" type="checkbox"/>
+<span class="slider"></span>
+</label>
+</div>
+<div class="toggle-group">
+<span class="toggle-label">Özel Sözlük Etkin</span>
+<label class="switch">
+<input checked="" id="sozlukCevirisiEtkinToggle" type="checkbox"/>
+<span class="slider"></span>
+</label>
+</div>
+<div class="status-toast" id="statusToast">
+<span>✓ Ayarlar Kaydedildi</span>
+</div>
+<button class="btn-secondary" id="ayarlarBtn">
+<svg fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px;" viewbox="0 0 24 24">
+<path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>Yönetim Paneli</span>
+</button>
+</div>
+<div style="display:flex;justify-content:center;gap:16px;padding:14px;font:12px system-ui"><a href="https://buymeacoffee.com/haking" rel="noopener" style="color:#cbbf9b" target="_blank">☕ Destek ol</a><a data-contact="" href="mailto:cevir@haking.tr">Support</a></div><script src="interface-copy.js"></script><script src="popup.js"></script>
 </body>
 </html>

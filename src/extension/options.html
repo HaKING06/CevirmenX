@@ -1,9 +1,10 @@
 <!DOCTYPE html>
+
 <html lang="tr">
 <head>
-  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>ÇevirmenX - Yönetim Paneli</title>
-  <style>
+<meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>ÇevirmenX - Yönetim Paneli</title>
+<style>
     /* Default (Midnight Indigo) theme variables */
     :root {
       --bg: #0b0f19;
@@ -814,227 +815,189 @@
       display: flex;
     }
   </style>
-<link rel="stylesheet" href="panel.css"></head>
+<link href="panel.css" rel="stylesheet"/></head>
 <body>
-  <div class="wrapper">
-    <!-- Header -->
-    <div class="header">
-      <div class="brand">
-        <svg class="brand-logo" fill="none" viewBox="0 0 24 24" stroke="url(#logoGrad)" stroke-width="2.5">
-          <defs>
-            <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#fff" />
-              <stop offset="100%" stop-color="var(--primary)" />
-            </linearGradient>
-          </defs>
-          <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 21a.75.75 0 0 1-.75-.75V3.75a.75.75 0 0 1 1.5 0v16.5a.75.75 0 0 1-.75.75z" />
-          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 12h16.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1 0-1.5z" />
-          <path stroke-linecap="round" stroke-linejoin="round" d="m16.5 7.5 3 3-3 3M7.5 16.5l-3-3 3-3" />
-        </svg>
-        <div>
-          <div class="brand-name">ÇevirmenX</div>
-          <div class="brand-tagline">Özel sözlük ve anında akıllı çeviri paneli</div>
-        </div>
-      </div>
-
-      <!-- Controls & Dil Seçimi -->
-      <div class="header-controls">
-        <div class="language-control"><span aria-hidden="true">◎</span><select id="interface-language" aria-label="Interface language"><option value="en">English</option><option value="tr">Türkçe</option><option value="de">Deutsch</option><option value="es">Español</option><option value="fr">Français</option><option value="pt">Português</option><option value="ar">العربية</option></select></div>
-
-        <!-- Navigation Tabs -->
-        <div class="tabs" role="tablist"><button class="tab-btn active" data-tab="ceviri"><span id="workspace-tab-label">Translate</span></button>
-          <button class="tab-btn" data-tab="sozluk">
-            <span>📖 Özel Sözlük</span>
-          </button>
-          <button class="tab-btn" data-tab="gecmis">
-            <span>⏱️ Çeviri Geçmişi</span>
-          </button>
-          <button class="tab-btn" data-tab="ayarlar">
-            <span>⚙️ Ayarlar & Temalar</span>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Main Settings Card -->
-    <div class="card"><div class="tab-content active" id="tab-ceviri"><div class="workspace-intro"><span class="panel-eyebrow">ÇEVİRMENX / WORKSPACE</span><h2 id="workspace-heading">Translate without leaving your flow.</h2><p id="workspace-description">Write your text, choose a language and translate. Your history stays on this device.</p></div><section><h2>Yeni çeviri</h2><div class="row"><label>Kaynak <select id="w-source"><option value="auto">Otomatik</option></select></label><label>Hedef <select id="w-target"></select></label></div><textarea id="w-text" maxlength="5000" placeholder="Çevirmek istediğin metin" aria-label="Çevrilecek metin"></textarea><button id="w-translate">Çevir</button><p id="w-result" role="status" style="white-space:pre-wrap"></p><button id="w-copy">Kopyala</button></section><section><h2>Tercihler</h2><label><input type="checkbox" id="w-memory"> Çeviri hafızası (bu cihazda)</label><label><input type="checkbox" id="w-release">Güncelleme notlarını otomatik aç</label><button id="w-clearMemory">Hafızayı temizle</button><a href="#" id="w-shortcut">Kısayolları düzenle</a></section><section><h2>Geçmiş ve favoriler</h2><input id="w-search" placeholder="Geçmişte ara" aria-label="Geçmişte ara"><button id="w-export">JSON dışa aktar</button><button id="w-clear">Geçmişi sil</button><div id="w-history"></div></section></div>
-      
-      <!-- TAB 1: ÖZEL SÖZLÜK -->
-      <div class="tab-content" id="tab-sozluk">
-        <h3>Dinamik Çeviri Sözlüğü</h3>
-        <div class="subtitle">Çeviri motorunun hata yaptığı veya istediğiniz jargona uydurmak istediğiniz terimleri belirli bir kaynak ve hedef dile göre kaydedin.</div>
-        
-        <div class="sozluk-adder">
-          <div class="adder-row">
-            <input type="text" id="kelimeInput" placeholder="Orijinal Terim (örn: naber)" style="flex: 1;">
-            <input type="text" id="cevirisiInput" placeholder="Çevirisi (örn: what's up)" style="flex: 1;">
-          </div>
-          
-          <div class="adder-row" style="justify-content: space-between;">
-            <div style="display: flex; align-items: center; gap: 8px;">
-              <div id="sozlukKaynakDilContainer" style="width: 190px;"></div>
-              
-              <span style="color: var(--text-muted); font-weight: bold; font-size: 14px;">➔</span>
-              
-              <div id="sozlukHedefDilContainer" style="width: 190px;"></div>
-            </div>
-            
-            <button id="ekleBtn" class="btn btn-primary" style="min-width: 140px;">
-              <svg style="width: 16px; height: 16px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-              </svg>
-              <span>Ekle</span>
-            </button>
-          </div>
-        </div>
-
-        <div class="input-row" style="margin-bottom: 12px;">
-          <input type="text" id="sozlukAramaInput" placeholder="Sözlük içinde terim veya dil ara...">
-        </div>
-
-        <div class="list-container" id="sozlukListesi">
-          <!-- List loaded here -->
-        </div>
-
-        <div class="footer-tools">
-          <button id="disaAktarBtn" class="btn btn-outline btn-sm">
-            <svg style="width: 14px; height: 14px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-            </svg>
+<div class="wrapper">
+<!-- Header -->
+<div class="header">
+<div class="brand">
+<img alt="" class="brand-logo" src="icon.png"/>
+<div>
+<div class="brand-name">ÇevirmenX</div>
+<div class="brand-tagline">Özel sözlük ve anında akıllı çeviri paneli</div>
+</div>
+</div>
+<!-- Controls & Dil Seçimi -->
+<div class="header-controls">
+<div class="language-control"><span aria-hidden="true">◎</span><select aria-label="Interface language" id="interface-language"><option value="en">English</option><option value="tr">Türkçe</option><option value="de">Deutsch</option><option value="es">Español</option><option value="fr">Français</option><option value="pt">Português</option><option value="ar">العربية</option><option value="ru">Русский</option></select></div>
+<!-- Navigation Tabs -->
+<div class="tabs" role="tablist"><button class="tab-btn active" data-tab="ceviri"><span id="workspace-tab-label">Translate</span></button>
+<button class="tab-btn" data-tab="sozluk">
+<span>📖 Özel Sözlük</span>
+</button>
+<button class="tab-btn" data-tab="gecmis">
+<span>⏱️ Çeviri Geçmişi</span>
+</button>
+<button class="tab-btn" data-tab="ayarlar">
+<span>⚙️ Ayarlar &amp; Temalar</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Main Settings Card -->
+<div class="card"><div class="tab-content active" id="tab-ceviri"><div class="workspace-intro"><span class="panel-eyebrow">ÇEVİRMENX / WORKSPACE</span><h2 id="workspace-heading">Translate without leaving your flow.</h2><p id="workspace-description">Write your text, choose a language and translate. Your history stays on this device.</p></div><section><h2><span data-work="0">Yeni çeviri</span></h2><div class="row"><label><span data-work="1">Kaynak</span><select id="w-source"><option value="auto">Otomatik</option></select></label><label><span data-work="2">Hedef</span><select id="w-target"></select></label></div><textarea aria-label="Çevrilecek metin" id="w-text" maxlength="5000" placeholder="Çevirmek istediğin metin"></textarea><button id="w-translate"><span data-work="3">Çevir</span></button><p id="w-result" role="status" style="white-space:pre-wrap"></p><button id="w-copy"><span data-work="4">Kopyala</span></button></section><section><h2><span data-work="5">Tercihler</span></h2><label><input id="w-memory" type="checkbox"/><span data-work="6">Çeviri hafızası (bu cihazda)</span></label><label><input id="w-release" type="checkbox"/><span data-work="7">Güncelleme notlarını otomatik aç</span></label><button id="w-clearMemory"><span data-work="8">Hafızayı temizle</span></button><a href="#" id="w-shortcut"><span data-work="9">Kısayolları düzenle</span></a></section><section><h2><span data-work="10">Geçmiş ve favoriler</span></h2><input aria-label="Geçmişte ara" id="w-search" placeholder="Geçmişte ara"/><button id="w-export"><span data-work="11">JSON dışa aktar</span></button><button id="w-clear"><span data-work="12">Geçmişi sil</span></button><div id="w-history"></div></section></div>
+<!-- TAB 1: ÖZEL SÖZLÜK -->
+<div class="tab-content" id="tab-sozluk">
+<h3>Dinamik Çeviri Sözlüğü</h3>
+<div class="subtitle">Çeviri motorunun hata yaptığı veya istediğiniz jargona uydurmak istediğiniz terimleri belirli bir kaynak ve hedef dile göre kaydedin.</div>
+<div class="sozluk-adder">
+<div class="adder-row">
+<input id="kelimeInput" placeholder="Orijinal Terim (örn: naber)" style="flex: 1;" type="text"/>
+<input id="cevirisiInput" placeholder="Çevirisi (örn: what's up)" style="flex: 1;" type="text"/>
+</div>
+<div class="adder-row" style="justify-content: space-between;">
+<div style="display: flex; align-items: center; gap: 8px;">
+<div id="sozlukKaynakDilContainer" style="width: 190px;"></div>
+<span style="color: var(--text-muted); font-weight: bold; font-size: 14px;">➔</span>
+<div id="sozlukHedefDilContainer" style="width: 190px;"></div>
+</div>
+<button class="btn btn-primary" id="ekleBtn" style="min-width: 140px;">
+<svg fill="none" stroke="currentColor" stroke-width="2.5" style="width: 16px; height: 16px;" viewbox="0 0 24 24">
+<path d="M12 4.5v15m7.5-7.5h-15" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>Ekle</span>
+</button>
+</div>
+</div>
+<div class="input-row" style="margin-bottom: 12px;">
+<input id="sozlukAramaInput" placeholder="Sözlük içinde terim veya dil ara..." type="text"/>
+</div>
+<div class="list-container" id="sozlukListesi">
+<!-- List loaded here -->
+</div>
+<div class="footer-tools">
+<button class="btn btn-outline btn-sm" id="disaAktarBtn">
+<svg fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px;" viewbox="0 0 24 24">
+<path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
             Sözlüğü İndir (.json)
           </button>
-          <button id="iceAktarBtn" class="btn btn-outline btn-sm">
-            <svg style="width: 14px; height: 14px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
-            </svg>
+<button class="btn btn-outline btn-sm" id="iceAktarBtn">
+<svg fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px;" viewbox="0 0 24 24">
+<path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
             Dosyadan Yükle
           </button>
-          <button id="sozluguTemizleBtn" class="btn btn-danger btn-sm" style="margin-left: auto;">
+<button class="btn btn-danger btn-sm" id="sozluguTemizleBtn" style="margin-left: auto;">
             🗑️ Sözlüğü Temizle
           </button>
-          <input type="file" id="importFileInput" style="display: none;" accept=".json">
-        </div>
-      </div>
-
-      <!-- TAB 2: ÇEVİRİ GEÇMİŞİ -->
-      <div class="tab-content" id="tab-gecmis">
-        <div class="history-header">
-          <div>
-            <h3>Çeviri Geçmişi</h3>
-            <div class="subtitle" style="margin-bottom: 0;">Son yaptığınız çevirilerin listesi. Kolayca kopyalayabilir veya sözlüğe ekleyebilirsiniz.</div>
-          </div>
-          <button id="gecmisiTemizleBtn" class="btn btn-danger btn-sm">
+<input accept=".json" id="importFileInput" style="display: none;" type="file"/>
+</div>
+</div>
+<!-- TAB 2: ÇEVİRİ GEÇMİŞİ -->
+<div class="tab-content" id="tab-gecmis">
+<div class="history-header">
+<div>
+<h3>Çeviri Geçmişi</h3>
+<div class="subtitle" style="margin-bottom: 0;">Son yaptığınız çevirilerin listesi. Kolayca kopyalayabilir veya sözlüğe ekleyebilirsiniz.</div>
+</div>
+<button class="btn btn-danger btn-sm" id="gecmisiTemizleBtn">
             🗑️ Geçmişi Temizle
           </button>
-        </div>
-
-        <div class="input-row" style="margin-bottom: 12px;">
-          <input type="text" id="gecmisAramaInput" placeholder="Geçmiş içinde ara...">
-        </div>
-
-        <div class="list-container" id="gecmisListesi" style="max-height: 380px;">
-          <!-- History items loaded here -->
-        </div>
-      </div>
-
-      <!-- TAB 3: AYARLAR & TEMALAR -->
-      <div class="tab-content" id="tab-ayarlar">
-        <h3>Eklenti Ayarları</h3>
-        <div class="subtitle">Çeviri tetikleme yöntemlerini düzenleyin, kısayol tuşlarını kaydedin ve eklenti renk temasını seçin.</div>
-
-        <div class="settings-grid">
-          <!-- Sol Sütun: Toggles ve Temalar -->
-          <div class="settings-column">
-            
-            <div class="setting-card">
-              <div class="setting-title">Arayüz Seçenekleri</div>
-              
-              <div class="toggle-setting">
-                <div class="toggle-details">
-                  <div class="toggle-name">Çeviri Balonu (Hover Bubble)</div>
-                  <div class="toggle-desc">Metin seçildiğinde yanında küçük çeviri ikonu çıkar. Kısayola basmadan tıklayıp çevirebilirsiniz.</div>
-                </div>
-                <label class="switch">
-                  <input type="checkbox" id="balonGosterToggle">
-                  <span class="slider"></span>
-                </label>
-              </div>
-
-              <div class="toggle-setting">
-                <div class="toggle-details">
-                  <div class="toggle-name">Sözlük Çevirisi Etkin</div>
-                  <div class="toggle-desc">Çeviri yaparken öncelikle dinamik sözlüğünüzdeki tanımlar kontrol edilir.</div>
-                </div>
-                <label class="switch">
-                  <input type="checkbox" id="sozlukCevirisiEtkinToggle">
-                  <span class="slider"></span>
-                </label>
-              </div>
-            </div>
-
-            <div class="setting-card">
-              <div class="setting-title">Renk Teması</div>
-              <div class="theme-picker">
-                <div class="theme-card active" data-theme-name="indigo">
-                  <div class="theme-dot" style="background: #6366f1;"></div>
-                  <div class="theme-name">Midnight</div>
-                </div>
-                <div class="theme-card" data-theme-name="purple">
-                  <div class="theme-dot" style="background: #a855f7;"></div>
-                  <div class="theme-name">Amethyst</div>
-                </div>
-                <div class="theme-card" data-theme-name="emerald">
-                  <div class="theme-dot" style="background: #10b981;"></div>
-                  <div class="theme-name">Emerald</div>
-                </div>
-                <div class="theme-card" data-theme-name="amber">
-                  <div class="theme-dot" style="background: #f59e0b;"></div>
-                  <div class="theme-name">Amber</div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-          <!-- Sağ Sütun: Klavye Kısayolu -->
-          <div class="settings-column">
-            
-            <div class="setting-card" style="flex: 1; display: flex; flex-direction: column; justify-content: space-between;">
-              <div>
-                <div class="setting-title">Metin Seçim Kısayolu (Sayfa İçi)</div>
-                <div class="shortcut-box" id="shortcutBox">
-                  <div style="font-size: 13px; font-weight: 700; color: #94a3b8;">Aktif Tetikleyici Kısayol</div>
-                  <div class="shortcut-display" id="shortcutDisplay">Alt + T</div>
-                  <div>
-                    <button id="kisayolKayitBtn" class="btn btn-primary" style="padding: 10px 18px; font-size: 13px; width: 100%;">
+</div>
+<div class="input-row" style="margin-bottom: 12px;">
+<input id="gecmisAramaInput" placeholder="Geçmiş içinde ara..." type="text"/>
+</div>
+<div class="list-container" id="gecmisListesi" style="max-height: 380px;">
+<!-- History items loaded here -->
+</div>
+</div>
+<!-- TAB 3: AYARLAR & TEMALAR -->
+<div class="tab-content" id="tab-ayarlar">
+<h3>Eklenti Ayarları</h3>
+<div class="subtitle">Çeviri tetikleme yöntemlerini düzenleyin, kısayol tuşlarını kaydedin ve eklenti renk temasını seçin.</div>
+<div class="settings-grid">
+<!-- Sol Sütun: Toggles ve Temalar -->
+<div class="settings-column">
+<div class="setting-card">
+<div class="setting-title">Arayüz Seçenekleri</div>
+<div class="toggle-setting">
+<div class="toggle-details">
+<div class="toggle-name">Çeviri Balonu (Hover Bubble)</div>
+<div class="toggle-desc">Metin seçildiğinde yanında küçük çeviri ikonu çıkar. Kısayola basmadan tıklayıp çevirebilirsiniz.</div>
+</div>
+<label class="switch">
+<input id="balonGosterToggle" type="checkbox"/>
+<span class="slider"></span>
+</label>
+</div>
+<div class="toggle-setting">
+<div class="toggle-details">
+<div class="toggle-name">Sözlük Çevirisi Etkin</div>
+<div class="toggle-desc">Çeviri yaparken öncelikle dinamik sözlüğünüzdeki tanımlar kontrol edilir.</div>
+</div>
+<label class="switch">
+<input id="sozlukCevirisiEtkinToggle" type="checkbox"/>
+<span class="slider"></span>
+</label>
+</div>
+</div>
+<div class="setting-card">
+<div class="setting-title">Renk Teması</div>
+<div class="theme-picker">
+<div class="theme-card active" data-theme-name="indigo">
+<div class="theme-dot" style="background: #6366f1;"></div>
+<div class="theme-name">Midnight</div>
+</div>
+<div class="theme-card" data-theme-name="purple">
+<div class="theme-dot" style="background: #a855f7;"></div>
+<div class="theme-name">Amethyst</div>
+</div>
+<div class="theme-card" data-theme-name="emerald">
+<div class="theme-dot" style="background: #10b981;"></div>
+<div class="theme-name">Emerald</div>
+</div>
+<div class="theme-card" data-theme-name="amber">
+<div class="theme-dot" style="background: #f59e0b;"></div>
+<div class="theme-name">Amber</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Sağ Sütun: Klavye Kısayolu -->
+<div class="settings-column">
+<div class="setting-card" style="flex: 1; display: flex; flex-direction: column; justify-content: space-between;">
+<div>
+<div class="setting-title">Metin Seçim Kısayolu (Sayfa İçi)</div>
+<div class="shortcut-box" id="shortcutBox">
+<div style="font-size: 13px; font-weight: 700; color: #94a3b8;">Aktif Tetikleyici Kısayol</div>
+<div class="shortcut-display" id="shortcutDisplay">Alt + T</div>
+<div>
+<button class="btn btn-primary" id="kisayolKayitBtn" style="padding: 10px 18px; font-size: 13px; width: 100%;">
                       Kısayolu Değiştir
                     </button>
-                  </div>
-                </div>
-              </div>
-
-              <p id="kisayolTalimat" class="subtitle"></p><div class="shortcut-warning">
-                <div style="font-weight: 800; color: #f1f5f9; margin-bottom: 4px; display: flex; align-items: center; gap: 4px;">
+</div>
+</div>
+</div>
+<p class="subtitle" id="kisayolTalimat"></p><div class="shortcut-warning">
+<div style="font-weight: 800; color: #f1f5f9; margin-bottom: 4px; display: flex; align-items: center; gap: 4px;">
                   ⚠️ Kısayol Türleri ve Sınırlandırmalar
                 </div>
-                <div style="line-height: 1.4; color: #cbd5e1; font-size: 11px;">
-                  <strong>1. Sayfa İçi Kısayol (Yukarıdaki):</strong> Web sayfalarındaki metinleri seçip basınca çalışır. Anında güncellenir.<br>
-                  <strong>2. Tarayıcı Kısayolu (Natif):</strong> Tarayıcı genelinde geçerlidir. Güvenlik gereği Chrome bu native tuşu otomatik değiştirmemize izin vermez. Bunu güncellemek için aşağıdaki adresi açın:
+<div style="line-height: 1.4; color: #cbd5e1; font-size: 11px;">
+<strong>1. Sayfa İçi Kısayol (Yukarıdaki):</strong> Web sayfalarındaki metinleri seçip basınca çalışır. Anında güncellenir.<br/>
+<strong>2. Tarayıcı Kısayolu (Natif):</strong> Tarayıcı genelinde geçerlidir. Güvenlik gereği Chrome bu native tuşu otomatik değiştirmemize izin vermez. Bunu güncellemek için aşağıdaki adresi açın:
                 </div>
-                <div class="chrome-url-row">
-                  <div class="chrome-url">chrome://extensions/shortcuts</div>
-                  <button id="kopyalaLinkBtn" class="btn btn-outline" style="padding: 4px 8px; font-size: 10px; font-weight: bold;">Sekmeyi Kopyala</button>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-  </div>
-  <footer class="panel-footer"><span>ÇevirmenX 1.3.3</span><a href="https://buymeacoffee.com/haking" target="_blank" rel="noopener">☕ Buy me a coffee</a></footer><script src="options.js"></script><script src="panel-workspace.js"></script>
+<div class="chrome-url-row">
+<div class="chrome-url">chrome://extensions/shortcuts</div>
+<button class="btn btn-outline" id="kopyalaLinkBtn" style="padding: 4px 8px; font-size: 10px; font-weight: bold;">Sekmeyi Kopyala</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<footer class="panel-footer"><span>ÇevirmenX 1.4.0</span><a href="https://buymeacoffee.com/haking" rel="noopener" target="_blank">☕ Buy me a coffee</a><a data-contact="" href="mailto:cevir@haking.tr">Support</a></footer><script src="interface-copy.js"></script><script src="options.js"></script><script src="panel-workspace.js"></script>
 </body>
 </html>

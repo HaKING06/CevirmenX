@@ -1,0 +1,12 @@
+ÇevirmenX 1.4.0
+
+Text übersetzen, eigenes Wörterbuch nutzen und im Verlauf nachsehen.
+
+Dein Wörterbuch — Begriffe selbst definieren.
+Lokaler Verlauf und Favoriten — Übersetzungen durchsuchen und exportieren.
+Übersetzungsspeicher — Gespeicherte Übersetzungen wiederverwenden.
+
+Kostenlos · Kein API-Schlüssel
+
+https://cevir.haking.tr/
+cevir@haking.tr

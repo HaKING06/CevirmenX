@@ -1,0 +1,12 @@
+ÇevirmenX 1.4.0
+
+Sayfadan ayrılmadan metin çevirisi, kişisel sözlük ve çeviri geçmişi.
+
+Kendi sözlüğün — Terimleri kendi dilinle tanımla.
+Yerel geçmiş ve favoriler — Önceki çevirilerini ara ve dışa aktar.
+Çeviri hafızası — Tekrarlanan çevirileri bu cihazdan getir.
+
+Ücretsiz · API anahtarı gerekmez
+
+https://cevir.haking.tr/
+cevir@haking.tr

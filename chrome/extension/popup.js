@@ -64,6 +64,7 @@ POPUP_STRINGS["es"]={"title": "TraductorX", "lblSource": "Idioma de origen", "lb
 POPUP_STRINGS["fr"]={"title": "TraducteurX", "lblSource": "Langue source", "lblTarget": "Langue cible", "lblBubble": "Afficher la bulle de survol", "lblDict": "Activer le dictionnaire personnalisé", "btnSettings": "Panneau de gestion", "toastSaved": "✓ Paramètres enregistrés", "optAuto": "🌐 Détection automatique", "langTr": "🇹🇷 turc", "langEn": "🇫🇷 Anglais", "langDe": "🇩🇪 Allemand", "langFr": "🇫🇷 Français", "langEs": "Espagnol", "langIt": "🇮🇹 italien", "langRu": "🇷🇺 Russe", "langZh": "🇨🇳 Chinois (ZH)", "langJa": "🇯🇵 Japonais (JA)", "langKo": "🇰🇷 Coréen (KO)", "langAr": "🇸🇦 Arabe (AR)", "langPt": "🇵🇹 Portugais (PT)", "langNl": "🇳🇱 Néerlandais (NL)", "langPl": "🇵🇱 Polonais (PL)", "langSv": "🇸🇪 Suédois (SV)", "langEl": "🇬🇷 grec (EL)", "langHi": "🇮🇳 Hindi (HI)"};
 POPUP_STRINGS["pt"]={"title": "TradutorX", "lblSource": "Idioma de origem", "lblTarget": "Idioma alvo", "lblBubble": "Mostrar bolha flutuante", "lblDict": "Habilitar dicionário personalizado", "btnSettings": "Painel de gerenciamento", "toastSaved": "✓ Configurações salvas", "optAuto": "🌐 Detecção automática", "langTr": "🇹🇷 Turco", "langEn": "🇬🇧 Inglês", "langDe": "🇩🇪 Alemão", "langFr": "🇫🇷 Francês", "langEs": "🇪🇸 Espanhol", "langIt": "🇮🇹 Italiano", "langRu": "🇷🇺 Russo", "langZh": "🇨🇳 Chinês (ZH)", "langJa": "🇯🇵 Japonês (JA)", "langKo": "🇰🇷 Coreano (KO)", "langAr": "🇸🇦 Árabe (AR)", "langPt": "🇵🇹 Português (PT)", "langNl": "🇳🇱 Holandês (NL)", "langPl": "🇵🇱 Polonês (PL)", "langSv": "🇸🇪 Sueco (SV)", "langEl": "🇬🇷 Grego (EL)", "langHi": "🇮🇳 Hindi (HI)"};
 POPUP_STRINGS["ar"]={"title": "مترجمX", "lblSource": "لغة المصدر", "lblTarget": "اللغة المستهدفة", "lblBubble": "عرض فقاعة التحويم", "lblDict": "تمكين القاموس المخصص", "btnSettings": "لوحة الإدارة", "toastSaved": "✓ تم حفظ الإعدادات", "optAuto": "🌐 الكشف التلقائي", "langTr": "🇹🇷 تركي", "langEn": "🇬🇧 الإنجليزية", "langDe": "🇩🇪 ألماني", "langFr": "🇫🇷 فرنسية", "langEs": "🇪🇸 الاسبانية", "langIt": "🇮🇹 ايطالي", "langRu": "🇷🇺 روسي", "langZh": "🇨🇳 الصينية (ZH)", "langJa": "🇯🇵 اليابانية (JA)", "langKo": "🇰🇷 الكورية (KO)", "langAr": "🇸🇦 العربية (AR)", "langPt": "🇵🇹 البرتغالية (PT)", "langNl": "🇳🇱 الهولندية (NL)", "langPl": "🇵🇱 البولندية (PL)", "langSv": "🇸🇪 السويدية (SV)", "langEl": "🇬🇷 اليونانية (EL)", "langHi": "🇮🇳 الهندية (HI)"};
+POPUP_STRINGS.ru = {"title": "ПереводчикX", "lblSource": "Исходный язык", "lblTarget": "Целевой язык", "lblBubble": "Показать пузырь при наведении", "lblDict": "Включить пользовательский словарь", "btnSettings": "Панель управления", "toastSaved": "✓ Настройки сохранены", "optAuto": "🌐 Автоопределение", "langTr": "🇹🇷 Турецкий", "langEn": "🇬🇧 английский", "langDe": "🇩🇪 немецкий", "langFr": "🇫🇷 Французский", "langEs": "🇪🇸 испанский", "langIt": "🇮🇹 Итальянский", "langRu": "🇷🇺 русский", "langZh": "🇨🇳 Китайский (Ж)", "langJa": "🇯🇵 Японский (JA)", "langKo": "🇰🇷 Корейский (КО)", "langAr": "🇸🇦 Арабский (AR)", "langPt": "🇵🇹 Португальский (ПТ)", "langNl": "🇳🇱 Голландский (Нидерланды)", "langPl": "🇵🇱 Польский (PL)", "langSv": "🇸🇪 Шведский (SV)", "langEl": "🇬🇷 Греческий (EL)", "langHi": "🇮🇳 Хинди (HI)"};
 let activeLang = 'en';
 let kaynakSelect = null;
 let hedefSelect = null;
@@ -78,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
       document.body.setAttribute('data-theme', result.eklentiTemasi);
     }
     
-    activeLang = result.arayuzDili || (['tr','en','de','es','fr','pt','ar'].includes(navigator.language.split('-')[0]) ? navigator.language.split('-')[0] : 'en');
+    activeLang = result.arayuzDili || (['tr','en','de','es','fr','pt','ar','ru'].includes(navigator.language.split('-')[0]) ? navigator.language.split('-')[0] : 'en');
     
     currentKaynakDil = result.kaynakDil || 'auto';
     currentHedefDil = result.hedefDil || 'en';
@@ -88,6 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById("sozlukCevirisiEtkinToggle").checked = result.sozlukCevirisiEtkin !== false;
 
     applyPopupLanguage(activeLang);
+    document.documentElement.lang=activeLang;document.documentElement.dir=activeLang==="ar"?"rtl":"ltr";document.querySelector("[data-contact]").textContent=cxText("Support",activeLang);
   });
 });
 

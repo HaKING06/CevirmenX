@@ -1,7 +1,7 @@
 chrome.runtime.onInstalled.addListener(() => {
   chrome.contextMenus.create({
     id: "cevir_sag_tik",
-    title: "Çevir ve Değiştir",
+    title: chrome.i18n.getMessage("translateSelection"),
     contexts: ["selection", "editable"]
   });
 });

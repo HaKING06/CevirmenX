@@ -127,7 +127,18 @@ async function makeExtensionPackage(browser) {
   const extension = browser === 'firefox' ? 'xpi' : 'zip';
   await zipDirectory(staging, path.join(output, 'download', `cevirmenx-${browser}.${extension}`));
   await cp(path.join(output, 'download', `cevirmenx-${browser}.${extension}`), path.join(output, 'download', `cevirmenx-${browser}-${releaseVersion}.${extension}`));
-  if (browser !== 'firefox') await cp(staging, path.join(output, browser), { recursive: true });
+  if (browser !== 'firefox') {
+    await cp(staging, path.join(output, browser), { recursive: true });
+    const storeDirectory = path.join(root, browser);
+    await mkdir(storeDirectory, { recursive: true });
+    await cp(staging, path.join(storeDirectory, 'extension'), { recursive: true });
+    await cp(path.join(output, 'download', `cevirmenx-${browser}.zip`), path.join(storeDirectory, `cevirmenx-${browser}.zip`));
+    await cp(path.join(root, 'store-assets', releaseVersion), path.join(storeDirectory, 'store-assets', releaseVersion), { recursive: true });
+    await writeFile(path.join(storeDirectory, 'README.txt'), `ÇevirmenX ${releaseVersion} — ${browser}
+Upload cevirmenx-${browser}.zip. Localized artwork and descriptions: store-assets/${releaseVersion}/
+Support: cevir@haking.tr
+`);
+  }
   await rm(staging, { recursive: true, force: true });
 }
 

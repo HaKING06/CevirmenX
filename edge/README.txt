@@ -1,1 +1,3 @@
-Version 1.3.3. Upload cevirmenx-edge.zip. extension/ is the unpacked browser package. Marketing assets are separate from extension files.
+ÇevirmenX 1.4.0 — edge
+Upload cevirmenx-edge.zip. Localized artwork and descriptions: store-assets/1.4.0/
+Support: cevir@haking.tr

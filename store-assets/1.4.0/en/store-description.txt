@@ -1,0 +1,12 @@
+ÇevirmenX 1.4.0
+
+Translate selected text, use your own dictionary and revisit your history.
+
+Your own dictionary — Define terms in your own words.
+Local history and favorites — Search and export previous translations.
+Translation memory — Reuse translations stored on this device.
+
+Free · No API key required
+
+https://cevir.haking.tr/
+cevir@haking.tr
